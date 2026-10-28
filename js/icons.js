@@ -233,6 +233,47 @@
       [[3, 3], [12, 3], [3, 12], [12, 12]].forEach(([x, y]) => { c.rect(x - 1, y, 3, 1); c.rect(x, y - 1, 1, 3); });
     },
 
+    firebase(c) {
+      c.art([
+        '....#...........', '....##..........', '...###..........', '...####.........', '...####..##.....', '..#####.####....',
+        '..#####.#####...', '..#####.######..', '.######.######..', '.#############..', '.##############.', '.##############.',
+        '..############..', '...##########...', '.....######.....', '................',
+      ]);
+    },
+    keras(c) {
+      c.rect(1, 1, 14, 14);
+      c.rect(4, 3, 2, 10, 0);
+      [[10, 3], [9, 4], [8, 5], [7, 6]].forEach(([x, y]) => c.rect(x, y, 3, 1, 0));
+      [[7, 9], [8, 10], [9, 11], [10, 12]].forEach(([x, y]) => c.rect(x, y, 3, 1, 0));
+      c.rect(6, 7, 2, 2, 0);
+    },
+    onnx(c) {
+      c.ring(8, 8, 7.5, 1.6);
+      c.fill((x, y) => Math.abs(x - 8) + Math.abs(y - 8) <= 4.4 && Math.abs(x - 8) + Math.abs(y - 8) >= 2.6);
+    },
+    opencv(c) {
+      // three open rings, each with its gap turned a different way
+      [[8, 4.6, Math.PI / 2], [4, 11.4, -Math.PI / 6], [12, 11.4, (-5 * Math.PI) / 6]].forEach(([cx, cy, gap]) => {
+        c.ring(cx, cy, 3.9, 1.7);
+        for (let d = 0; d < 4; d += 0.3) c.set(Math.floor(cx + Math.cos(gap) * d), Math.floor(cy + Math.sin(gap) * d), 0);
+        c.set(Math.floor(cx + Math.cos(gap) * 2.6 + 1), Math.floor(cy + Math.sin(gap) * 2.6), 0);
+      });
+    },
+    langchain(c) { c.ellipse(5.5, 10.5, 4.6, 2.3, -Math.PI / 4, 0.42); c.ellipse(10.5, 5.5, 4.6, 2.3, -Math.PI / 4, 0.42); },
+    spark(c) {
+      c.fill((x, y) => { const dx = x - 7.5, dy = y - 8.5, r = Math.hypot(dx, dy), a = Math.atan2(dy, dx); return r <= 2.3 + 4.6 * Math.max(0, Math.cos(5 * (a + Math.PI / 2))) ** 2; });
+      c.rect(11, 2, 4, 1); c.rect(13, 1, 1, 3);
+    },
+    matplotlib(c) {
+      c.ring(8, 8, 7.5, 1);
+      // a polar bar chart: wedges of different lengths
+      [[0.7, 5.6], [2.5, 4], [4.4, 6.2]].forEach(([a, r]) => c.fill((x, y) => { const dx = x - 8, dy = y - 8, t = Math.atan2(dy, dx) + Math.PI; return Math.hypot(dx, dy) <= r && Math.abs(t - a) < 0.5; }));
+    },
+    plotly(c) {
+      [[2, 4], [6, 2], [10, 3], [14, 1]].forEach(([x, n]) => { for (let i = 0; i < n; i++) c.rect(x - 1, 13 - i * 3, 2, 2); });
+      c.rect(1, 2, 2, 2); c.rect(5, 6, 2, 2);
+    },
+
     /* desktop */
     doc(c) {
       c.art([
