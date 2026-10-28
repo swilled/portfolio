@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Speed · every tick, zero lag</title>
+  <meta name="description" content="Speed is a low-latency desktop trading terminal for futures, equities and crypto: a Rust + Tauri host, a WebAssembly market-data engine and a 144–240Hz rendering pipeline.">
+  <meta name="theme-color" content="#0b0b0d">
+  <meta property="og:title" content="Speed · every tick, zero lag">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="pranav@uf">
+  <meta property="og:description" content="Speed is a low-latency desktop trading terminal for futures, equities and crypto: a Rust + Tauri host, a WebAssembly market-data engine and a 144–240Hz rendering pipeline.">
+  <link rel="canonical" href="https://pranavsivakumar.pages.dev/speed/">
+  <meta property="og:url" content="https://pranavsivakumar.pages.dev/speed/">
+  <meta property="og:image" content="https://pranavsivakumar.pages.dev/speed/media/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Speed · every tick, zero lag">
+  <meta name="twitter:description" content="Speed is a low-latency desktop trading terminal for futures, equities and crypto: a Rust + Tauri host, a WebAssembly market-data engine and a 144–240Hz rendering pipeline.">
+  <meta name="twitter:image" content="https://pranavsivakumar.pages.dev/speed/media/og.jpg">
+  <link rel="icon" href="media/img/icon-gold.png">
+  <link rel="stylesheet" href="player.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../css/qol.css">
+  <script>/* a page-to-page wipe the browser cancels (say, on a prerendered page) is fine: navigation still happens, so don't log it as an error */
+    ['pageswap', 'pagereveal'].forEach((t) => addEventListener(t, (e) => { const v = e.viewTransition; if (v) [v.ready, v.finished, v.updateCallbackDone].forEach((p) => p.catch(() => {})); }));</script>
+  <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"#\"], [href$=\".pdf\"], [target=_blank], [download], [href^=\"mailto:\"]"}}]},"eagerness":"moderate"}]}</script>
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="Speed home"><img src="media/img/icon-gold.png" alt="" width="28" height="28"><span class="word">spee<span>d</span></span></a>
+    <nav aria-label="Sections">
+      <a href="#features">features</a>
+      <a href="#performance">performance</a>
+      <a href="#architecture">architecture</a>
+      <a class="nav-cta" href="#demo">watch demo</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-h">
+      <div class="ticker-bg" id="ticker-bg" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow">desktop trading terminal · futures · equities · crypto</p>
+        <h1 id="hero-h"><span>Every tick.</span><span class="gold">Zero lag.</span></h1>
+        <p class="sub">Speed is the charting platform I built for my own trading after TradingView, Quantower, Deepcharts, MotiveWave and NinjaTrader all fell short. One app for charts, orderflow and execution, built around one rule: the screen never falls behind the market.</p>
+        <div class="cta">
+          <a class="btn gold-btn" href="#demo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z"/></svg>watch the 60s demo</a>
+          <a class="btn line-btn" href="#architecture">how it's built</a>
+        </div>
+      </div>
+      <figure class="terminal" aria-label="A live, simulated price chart rendering in your browser">
+        <div class="term-bar">
+          <span class="sym">MNQ · 12-26</span><span class="desc">Micro E-mini Nasdaq-100</span>
+          <span class="quote"><b class="bid" id="q-bid">—</b><b class="last" id="q-last">—</b><b class="ask" id="q-ask">—</b></span>
+        </div>
+        <canvas id="hero-chart"></canvas>
+        <div class="hud" aria-live="off">
+          <span><i id="hud-fps">—</i> fps</span>
+          <span><i id="hud-ms">—</i> ms / frame</span>
+          <span><i id="hud-tps">—</i> ticks / s</span>
+        </div>
+        <figcaption>simulated feed · rendering live in your browser</figcaption>
+      </figure>
+    </section>
+
+    <section class="features" id="features" aria-label="Features">
+      <article class="feat reveal">
+        <div class="feat-copy">
+          <p class="label">depth of market · dom</p>
+          <h2>The book, live.</h2>
+          <p>Every level of the order book updates in place at full frame rate, so you can watch liquidity move without the ladder jumping around.</p>
+          <ul><li>Level-2 depth over a 24-byte binary protocol</li><li>Order ticket with bracket targets and stops</li><li>Kill switch, flatten and cancel-all always in reach</li></ul>
+        </div>
+        <div class="feat-vis panel"><canvas id="dom" aria-label="Live simulated order book ladder"></canvas></div>
+      </article>
+
+      <article class="feat flip reveal">
+        <div class="feat-copy">
+          <p class="label">order flow · footprint</p>
+          <h2>Bid × ask, every price.</h2>
+          <p>Footprint bars split each candle into the volume that traded on the bid and on the ask at every price, with imbalances lit up so aggressive buying and selling stand out.</p>
+        </div>
+        <div class="feat-vis tilt"><img src="media/img/heatmap.webp" srcset="media/img/heatmap-800w.webp 800w, media/img/heatmap.webp 1600w" sizes="(max-width: 760px) calc(100vw - 32px), 640px" width="1600" height="900" alt="3D footprint view showing bid by ask volume at each price, with imbalances highlighted in green" loading="lazy"></div>
+      </article>
+
+      <article class="feat reveal">
+        <div class="feat-copy">
+          <p class="label">time &amp; sales</p>
+          <h2>Every print, as it lands.</h2>
+          <p>The tape streams every trade the moment it lands, colored by side, so you can feel the pace of the market and not just see it.</p>
+        </div>
+        <div class="feat-vis panel"><canvas id="tape" aria-label="Live simulated time and sales tape"></canvas></div>
+      </article>
+
+      <article class="feat flip reveal">
+        <div class="feat-copy">
+          <p class="label">volume profile</p>
+          <h2>Where size actually traded.</h2>
+          <p>Volume profiles show the prices where the most size changed hands, built from the tick stream rather than minute bars.</p>
+        </div>
+        <div class="feat-vis tilt"><img src="media/img/profile.webp" srcset="media/img/profile-800w.webp 800w, media/img/profile.webp 1600w" sizes="(max-width: 760px) calc(100vw - 32px), 640px" width="1600" height="900" alt="Price chart with a volume profile showing where the most size traded" loading="lazy"></div>
+      </article>
+
+      <article class="feat reveal">
+        <div class="feat-copy">
+          <p class="label">replay</p>
+          <h2>The strategy, replayed.</h2>
+          <p>Replay a session tick by tick with your strategy running against it, and watch the equity curve, win rate and drawdown build as it trades.</p>
+        </div>
+        <div class="feat-vis tilt"><img src="media/img/replay.webp" srcset="media/img/replay-800w.webp 800w, media/img/replay.webp 1600w" sizes="(max-width: 760px) calc(100vw - 32px), 640px" width="1600" height="900" alt="Strategy replay screen with an equity curve and trade statistics" loading="lazy"></div>
+      </article>
+    </section>
+
+    <section class="perf" id="performance" aria-labelledby="perf-h">
+      <div class="wrap">
+        <p class="label reveal">performance</p>
+        <h2 id="perf-h" class="reveal">Fast is the feature.</h2>
+        <div class="stats">
+          <div class="stat reveal"><b data-count="0">0</b><span>allocations on the hot path</span><small>ticks, crosshair and ladder updates create no garbage</small></div>
+          <div class="stat reveal"><b data-count="240" data-suffix="Hz">240Hz</b><span>frame budget held</span><small>under heavy volatility on 144/240Hz displays</small></div>
+          <div class="stat reveal"><b data-count="0.05" data-prefix="&lt;" data-suffix="ms" data-decimals="2">&lt;0.05ms</b><span>symbol search</span><small>inverted prefix index</small></div>
+          <div class="stat reveal"><b data-count="20" data-prefix="&lt;" data-suffix="MB">&lt;20MB</b><span>idle memory, lean mode</span><small>native low-memory profile, clean launch</small></div>
+          <div class="stat reveal"><b data-count="1180" data-suffix="+">1,180+</b><span>tests</span><small>unit and integration, Node + JSDOM</small></div>
+          <div class="stat reveal"><b data-count="100000" data-suffix=" → 500">100,000 → 500</b><span>points drawn</span><small>LTTB downsampling keeps shape, drops cost</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="arch" id="architecture" aria-labelledby="arch-h">
+      <div class="wrap">
+        <p class="label reveal">architecture</p>
+        <h2 id="arch-h" class="reveal">Three layers, one direction.</h2>
+        <p class="lede reveal">Market data enters once and flows down through three layers, each handing the next a zero-copy view of the same memory.</p>
+        <div class="layers">
+          <div class="layer reveal">
+            <span class="tag">01 · native host</span><h3>Rust · Tauri v2 · mimalloc</h3>
+            <ul><li>1ms multimedia timer</li><li>elevated ingestion thread</li><li>shared-memory IPC with FNV-1a checks</li></ul>
+          </div>
+          <div class="pipe" aria-hidden="true"><i></i><i></i><i></i><span>lock-free ring buffer</span></div>
+          <div class="layer reveal">
+            <span class="tag">02 · market data engine</span><h3>TypeScript · WebAssembly · Workers</h3>
+            <ul><li>24-byte binary wire protocol</li><li>vectorized EMA, VWAP, bands</li><li>LTTB downsampler</li></ul>
+          </div>
+          <div class="pipe" aria-hidden="true"><i></i><i></i><i></i><span>offscreen canvas transfer</span></div>
+          <div class="layer reveal">
+            <span class="tag">03 · rendering pipeline</span><h3>Canvas 2D · WebGL</h3>
+            <ul><li>3-tile sliding viewport</li><li>glyph atlas + precompiled paths</li><li>double-buffered swap chains</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo" id="demo" aria-labelledby="demo-h">
+      <div class="wrap">
+        <p class="label reveal">the demo</p>
+        <h2 id="demo-h" class="reveal">60 seconds of Speed.</h2>
+        <figure class="player reveal" id="speed-video" data-title="Speed demo"
+                data-chapters='[[0,"intro"],[5,"charting"],[23,"order book"],[27,"bid × ask heatmap"],[30,"time &amp; sales"],[34,"volume profile"],[38,"strategy replay"],[46,"multi-chart"],[56,"outro"]]'
+                data-thumbs="media/speed-thumbs.webp" data-thumb-cols="10" data-duration="60">
+          <video src="media/speed-demo.mp4" poster="media/speed-poster.webp" preload="none" controls playsinline></video>
+        </figure>
+        <div class="player-chapters reveal" data-for="speed-video"></div>
+        <p class="keys">space play · ←/→ 5s · j/l 10s · n/b chapters · [ ] speed · f fullscreen</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <a class="brand" href="#top"><img src="media/img/icon-gold.png" alt="" width="24" height="24"><span class="word">spee<span>d</span></span></a>
+      <p>Designed and built by <a href="../">Pranav Sivakumar</a>. In development since January 2026. <a href="https://github.com/swilled/speed-web" target="_blank" rel="noopener">GitHub ↗</a> · This page: <span data-weight>measuring…</span>.</p>
+      <nav class="foot-nav" aria-label="More work"><a class="back" href="../">← portfolio</a><a class="back" href="../blip/">next: Blip →</a></nav>
+    </div>
+  </footer>
+
+  <script src="player.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../js/qol.js" defer></script>
+</body>
+</html>

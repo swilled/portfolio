@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>
+    // pick the theme before anything paints: a saved choice wins, otherwise night
+    (() => { let t = null; try { t = localStorage.getItem('theme'); } catch (e) {}
+      document.documentElement.dataset.theme = t || 'dark'; })();
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pranav Sivakumar · off the clock</title>
+  <meta name="description" content="What Pranav Sivakumar does off the clock: alpine climbing, pickleball, Formula 1, video games and music.">
+  <meta name="theme-color" content="#0f0c16">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="pranav@uf">
+  <meta property="og:title" content="Pranav Sivakumar · off the clock">
+  <meta property="og:description" content="Summits in Glacier, a pickleball game, a live F1 pit wall, a pixel handheld and a record crate.">
+  <link rel="canonical" href="https://pranavsivakumar.pages.dev/life/">
+  <meta property="og:url" content="https://pranavsivakumar.pages.dev/life/">
+  <meta property="og:image" content="https://pranavsivakumar.pages.dev/assets/og-life.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pranav Sivakumar · off the clock">
+  <meta name="twitter:description" content="Summits in Glacier, a pickleball game, a live F1 pit wall, a pixel handheld and a record crate.">
+  <meta name="twitter:image" content="https://pranavsivakumar.pages.dev/assets/og-life.png">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="preload" href="../assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="life.css">
+  <script>/* a page-to-page wipe the browser cancels (say, on a prerendered page) is fine: navigation still happens, so don't log it as an error */
+    ['pageswap', 'pagereveal'].forEach((t) => addEventListener(t, (e) => { const v = e.viewTransition; if (v) [v.ready, v.finished, v.updateCallbackDone].forEach((p) => p.catch(() => {})); }));</script>
+  <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"#\"], [href$=\".pdf\"], [target=_blank], [download], [href^=\"mailto:\"]"}}]},"eagerness":"moderate"}]}</script>
+</head>
+<body>
+  <a class="skip" href="#alpine">skip to alpine</a>
+
+  <!-- same desktop as the home page, stocked for off the clock -->
+  <nav class="desktop" aria-label="Desktop shortcuts">
+    <a class="dicon" href="../" data-icon="folder"><span>~/</span></a>
+    <a class="dicon" href="#alpine" data-icon="mountain"><span>summit.log</span></a>
+    <a class="dicon" href="#court" data-icon="paddle"><span>court/</span></a>
+    <a class="dicon" href="#track" data-icon="flag"><span>pitwall</span></a>
+    <a class="dicon" href="#games" data-icon="gamepad"><span>games/</span></a>
+    <a class="dicon" href="#music" data-icon="record"><span>crate/</span></a>
+    <a class="dicon" href="../assets/resume.pdf" target="_blank" rel="noopener" data-icon="doc"><span>resume.pdf</span></a>
+  </nav>
+  <aside class="note" aria-label="peaks.txt">
+    <p class="note-title">peaks.txt</p>
+    <ul>
+      <li class="done">jungfrau</li>
+      <li class="done">glacier np ×3</li>
+      <li>adams, again</li>
+      <li>rainier <span>(the DC)</span></li>
+      <li>baker</li>
+      <li>denali, someday</li>
+    </ul>
+  </aside>
+
+  <div class="window">
+  <header class="titlebar">
+    <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <a class="host" href="../">pranav@uf: ~/life</a>
+    <nav aria-label="Sections">
+      <a href="#alpine">alpine</a>
+      <a href="#court">court</a>
+      <a href="#track">track</a>
+      <a href="#games">games</a>
+      <a href="#music">music</a>
+      <a class="nav-resume" href="../">cd ~</a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-label="Switch between night (terminal) and day (printout)"><span class="night"><i></i><b>night</b></span><span class="day"><i></i><b>day</b></span></button>
+    <span class="tty" id="tty" aria-hidden="true">zsh · 120×40</span>
+  </header>
+
+  <main>
+    <!-- hero: what's in here, and a trail that links the sections -->
+    <section class="life-hero" id="top" aria-labelledby="life-h">
+      <div class="wrap life-hero-inner">
+        <div class="life-intro">
+          <p class="cmd"><span class="ps">pranav@uf</span> <span class="cwd">~</span> <span class="dollar">$</span> <span class="typed">cd ~/life &amp;&amp; ls</span></p>
+          <h1 id="life-h" class="life-title">off the clock</h1>
+          <p class="life-lead">The stuff I do when I'm not shipping code. Most of it involves going somewhere high, going somewhere fast, or hitting something over a net.</p>
+          <ul class="dirs" aria-label="Sections">
+            <li><a href="#alpine" data-icon="alpine">alpine/</a></li>
+            <li><a href="#court" data-icon="court">court/</a></li>
+            <li><a href="#track" data-icon="track">track/</a></li>
+            <li><a href="#games" data-icon="games">games/</a></li>
+            <li><a href="#music" data-icon="music">music/</a></li>
+          </ul>
+        </div>
+        <div class="life-avatar">
+          <span class="bubble" id="bubble" aria-hidden="true">on belay?</span>
+          <svg id="avatar" class="avatar" role="img" aria-label="Pixel-art Pranav in a climbing helmet with an ice axe" shape-rendering="crispEdges" tabindex="0"></svg>
+          <span class="outcrop" aria-hidden="true"></span>
+        </div>
+      </div>
+      <canvas class="trail" id="trail" aria-hidden="true"></canvas>
+    </section>
+
+    <!-- alpine: the summit log, the ladder to Denali, next season -->
+    <section class="wrap life-sec" id="alpine" aria-labelledby="alpine-h">
+      <p class="cmd reveal"><span class="ps">pranav@uf</span> <span class="cwd">~/life</span> <span class="dollar">$</span> <span class="typed">cat alpine/summit.log</span></p>
+      <h2 id="alpine-h" class="section-title reveal">Alpine</h2>
+      <div class="alpine-why reveal">
+        <p class="sec-lead">What pulls me up there is the places. Glacier water so blue it looks fake, goats that couldn't care less that you showed up, a ridge turning pink at sunrise while the valley is still asleep. It's quiet up there in a way nothing else is, and everything gets simple: keep moving, watch the weather, look out for whoever's with you.</p>
+        <p class="sec-lead">Alpinism is how I get more of that. Every trip asks a little more of me, and the ones that turn me around, like Adams, teach me the most. The long game is to become a good enough mountaineer for the hardest peaks in the world, Denali first.</p>
+      </div>
+
+      <div class="logbook reveal">
+        <ol class="entries" id="entries" role="tablist" aria-label="Summit log">
+          <li role="presentation"><button type="button" role="tab" data-id="jungfrau" aria-selected="false"><b>Jungfrau</b><span class="tag">summit</span><small>4,158 m · Bernese Alps</small></button></li>
+          <li role="presentation"><button type="button" role="tab" data-id="siyeh" aria-selected="true"><b>Mount Siyeh</b><span class="tag">summit</span><small>10,014 ft · Glacier National Park</small></button></li>
+          <li role="presentation"><button type="button" role="tab" data-id="brown" aria-selected="false"><b>Mount Brown</b><span class="tag">summit</span><small>8,565 ft · Glacier National Park</small></button></li>
+          <li role="presentation"><button type="button" role="tab" data-id="altyn" aria-selected="false"><b>Altyn Peak</b><span class="tag">summit</span><small>7,947 ft · Many Glacier</small></button></li>
+          <li role="presentation"><button type="button" role="tab" data-id="adams" aria-selected="false"><b>Mount Adams</b><span class="tag tried">turned back</span><small>12,281 ft · South Cascades</small></button></li>
+          <li role="presentation"><button type="button" role="tab" data-id="skyline" aria-selected="false"><b>Skyline Loop</b><span class="tag hike">hiked</span><small>5.5 mi · Paradise</small></button></li>
+        </ol>
+        <figure class="stage">
+          <canvas id="stage" role="img" aria-label="Pixel landscape of the selected peak"></canvas>
+          <figcaption class="stage-cap" id="stage-cap" aria-live="polite"><p class="peak-name">Mount Siyeh</p><p class="peak-elev">10,014 ft</p><p class="peak-meta">Glacier National Park, Montana · 2026 · fifth-highest peak in the park</p><p class="peak-note">From Cracker Lake its north face is one of the biggest walls in the Rockies: about 4,000 feet of banded rock straight down into turquoise glacial water.</p></figcaption>
+          <p class="stage-hint" aria-hidden="true">something lives in every scene. click around.</p>
+        </figure>
+      </div>
+
+      <h3 class="sub reveal">the long game</h3>
+      <p class="sub-lead reveal">Everything drawn to scale. Filled is summited, striped is attempted, dotted is next.</p>
+      <div class="ladder reveal">
+        <canvas id="ladder" aria-hidden="true"></canvas>
+        <div class="ladder-labels" id="ladder-labels"></div>
+      </div>
+
+      <h3 class="sub reveal">next season <span class="count" id="season-count"></span></h3>
+      <div class="goals reveal">
+        <figure class="goal"><canvas data-scene="rainier"></canvas><figcaption><b>Mount Rainier</b> · 14,411 ft<br><span>Disappointment Cleaver, via Camp Muir. The big one for next summer.</span></figcaption></figure>
+        <figure class="goal"><canvas data-scene="baker"></canvas><figcaption><b>Mount Baker</b> · 10,781 ft<br><span>Glaciated, and still steaming from Sherman Crater.</span></figcaption></figure>
+        <figure class="goal"><canvas data-scene="cascades"></canvas><figcaption><b>North Cascades</b><br><span>Whatever else the weather and the calendar allow.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- court: tennis to pickleball -->
+    <section class="wrap life-sec" id="court" aria-labelledby="court-h">
+      <p class="cmd reveal"><span class="ps">pranav@uf</span> <span class="cwd">~/life</span> <span class="dollar">$</span> <span class="typed">cat court/history.txt</span></p>
+      <h2 id="court-h" class="section-title reveal">Court</h2>
+      <div class="court-grid">
+        <div class="reveal">
+          <p class="sec-lead">Pickleball started with tennis. I played all through high school and captained the team my junior and senior years, and we won the district tournament three years running.</p>
+          <p class="sec-lead">Now it's pickleball with friends: a smaller court, faster hands, a lot more trash talk.</p>
+          <div class="shelf" aria-label="Trophy shelf">
+            <span class="trophy" title="district champions"></span>
+            <span class="trophy" title="district champions"></span>
+            <span class="trophy" title="district champions"></span>
+            <span class="armband" title="team captain, junior and senior year">C</span>
+          </div>
+          <p class="shelf-cap">district champions ×3 · captain, junior + senior year</p>
+        </div>
+        <div class="court-play reveal">
+          <canvas id="court-canvas" aria-label="A playable pickleball rally against Pranav" role="img"></canvas>
+          <div class="court-ui">
+            <button class="btn primary" type="button" id="court-start">play pranav</button>
+            <span class="court-score" id="court-score">first to 7 · stay out of the kitchen</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- track: F1, live from the pit wall -->
+    <section class="wrap life-sec" id="track" aria-labelledby="track-h">
+      <p class="cmd reveal"><span class="ps">pranav@uf</span> <span class="cwd">~/life</span> <span class="dollar">$</span> <span class="typed">tail -f track/pitwall.log</span></p>
+      <h2 id="track-h" class="section-title reveal">Track</h2>
+      <p class="sec-lead reveal">I love racing and fast cars. Formula 1 is engineering at the limit: cars built to the thousandth, strategy decided in a few seconds over the radio. It's the same instinct that makes me care about a chart running at 240Hz. My driver is Lando.</p>
+      <div class="track-grid">
+        <div class="pitwall reveal" id="pitwall" aria-live="polite">
+          <p class="pw-head"><span class="pw-num">4</span><span><b>Lando Norris</b><br><span class="dim">McLaren · live from the pit wall</span></span></p>
+          <dl class="pw-stats" id="pw-stats"><div><dt>loading</dt><dd>…</dd></div></dl>
+          <p class="pw-next" id="pw-next"></p>
+        </div>
+        <div class="lights reveal" id="lights">
+          <p class="lights-title">lights out</p>
+          <div class="gantry" id="gantry" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <canvas class="launch" id="launch" aria-hidden="true"></canvas>
+          <p class="lights-out" id="lights-msg" aria-live="polite">press start, then hit space (or tap) the moment the lights go out.</p>
+          <div class="lights-ui"><button class="btn primary" type="button" id="lights-start">start</button><span class="dim" id="lights-best"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- games: a handheld and the cartridges -->
+    <section class="wrap life-sec" id="games" aria-labelledby="games-h">
+      <p class="cmd reveal"><span class="ps">pranav@uf</span> <span class="cwd">~/life</span> <span class="dollar">$</span> <span class="typed">ls games/</span></p>
+      <h2 id="games-h" class="section-title reveal">Games</h2>
+      <div class="playing reveal">
+        <div class="handheld" aria-hidden="true">
+          <span class="hh-cart" id="hh-cart"></span>
+          <div class="hh-face">
+            <div class="hh-bezel"><canvas id="hh-screen"></canvas></div>
+            <div class="hh-controls"><span class="hh-dpad"></span><span class="hh-ab"><i></i><i></i></span></div>
+          </div>
+        </div>
+        <div class="playing-side">
+          <p class="sec-lead">What I play when I'm not outside. Put a cartridge in.</p>
+          <ul class="carts" id="carts" aria-label="Games I play"></ul>
+          <p class="cart-note" id="cart-note" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- music: a crate of records and a turntable -->
+    <section class="wrap life-sec" id="music" aria-labelledby="music-h">
+      <p class="cmd reveal"><span class="ps">pranav@uf</span> <span class="cwd">~/life</span> <span class="dollar">$</span> <span class="typed">ls music/crate/</span></p>
+      <h2 id="music-h" class="section-title reveal">Music</h2>
+      <p class="sec-lead reveal">On repeat lately: otuka, Paramore, LUCKI and A$AP Rocky, plus a lot of house and instrumentals while I work. Pull a record from the crate and drop the needle.</p>
+      <div class="deck reveal">
+        <canvas id="deck" role="img" aria-label="A pixel turntable; the record's label is the album cover"></canvas>
+        <div class="deck-side">
+          <p class="np-k">now playing</p>
+          <p class="np-t" id="np-t">nothing yet</p>
+          <p class="np-a" id="np-a">pull a record from the crate below</p>
+          <div class="np-bar" aria-hidden="true"><i id="np-prog"></i></div>
+          <p class="np-note" id="np-note" aria-live="polite"></p>
+          <div class="deck-ui"><button class="btn primary" type="button" id="deck-play">▶ play</button><button class="btn ghost" type="button" id="deck-next">next record</button></div>
+        </div>
+      </div>
+      <div class="crate reveal" id="crate" aria-label="The crate"></div>
+      <p class="crate-cap reveal">30-second previews from Apple Music. drag the spinning record to scratch.</p>
+    </section>
+
+    <section class="contact life-end" id="contact" aria-labelledby="end-h">
+      <canvas class="campus" id="campus" aria-hidden="true"></canvas>
+      <div class="wrap">
+        <p class="cmd"><span class="ps">pranav@uf</span> <span class="cwd">~/life</span> <span class="dollar">$</span> cd ~</p>
+        <h2 id="end-h" class="contact-title">Back to work.</h2>
+        <div class="actions">
+          <a class="btn primary" href="../">← the portfolio</a>
+          <a class="btn ghost" href="mailto:pranav.sivakumar@ufl.edu">pranav.sivakumar@ufl.edu</a>
+        </div>
+        <p class="colophon"><span class="dim">this page:</span> <span data-weight>measuring…</span><span class="dim"> · no framework, no cookies</span></p>
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <footer class="statusbar">
+    <span class="mode" id="mode">NORMAL</span>
+    <form class="prompt" id="prompt" autocomplete="off">
+      <label for="cmd" class="visually-hidden">Type a command</label>
+      <span class="dollar" aria-hidden="true">$</span>
+      <input id="cmd" name="cmd" type="text" spellcheck="false" placeholder="type a command, or press ? for help">
+    </form>
+    <button class="pal-hint" type="button" data-palette-hint aria-label="Search the site"></button>
+    <span class="where" id="where" aria-hidden="true">~/life</span>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="../js/sprite.js" defer></script>
+  <script src="../js/icons.js" defer></script>
+  <script src="../js/fx.js" defer></script>
+  <script src="scenes.js" defer></script>
+  <script src="life.js" defer></script>
+  <script src="../js/qol.js" defer></script>
+  <script src="../js/resume.js" defer></script>
+</body>
+</html>

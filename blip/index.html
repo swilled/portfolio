@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blip · the web, out loud</title>
+  <meta name="description" content="Blip is a voice agent for blind and low-vision people. Browse, read, write and fill out forms on any website, just by talking. It works next to your screen reader and never acts on anything important without your exact words.">
+  <meta name="theme-color" content="#fbfbf9">
+  <meta property="og:title" content="Blip · the web, out loud">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="pranav@uf">
+  <meta property="og:description" content="Blip is a voice agent for blind and low-vision people.">
+  <link rel="canonical" href="https://pranavsivakumar.pages.dev/blip/">
+  <meta property="og:url" content="https://pranavsivakumar.pages.dev/blip/">
+  <meta property="og:image" content="https://pranavsivakumar.pages.dev/blip/media/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Blip · the web, out loud">
+  <meta name="twitter:description" content="Blip is a voice agent for blind and low-vision people.">
+  <meta name="twitter:image" content="https://pranavsivakumar.pages.dev/blip/media/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='%232d5bff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="player.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../css/qol.css">
+  <script>/* a page-to-page wipe the browser cancels (say, on a prerendered page) is fine: navigation still happens, so don't log it as an error */
+    ['pageswap', 'pagereveal'].forEach((t) => addEventListener(t, (e) => { const v = e.viewTransition; if (v) [v.ready, v.finished, v.updateCallbackDone].forEach((p) => p.catch(() => {})); }));</script>
+  <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"#\"], [href$=\".pdf\"], [target=_blank], [download], [href^=\"mailto:\"]"}}]},"eagerness":"moderate"}]}</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <a class="logo" href="#main" aria-label="Blip home">bl<span class="i">ı<i aria-hidden="true"></i></span>p</a>
+    <nav aria-label="Sections">
+      <a href="#features">What it does</a>
+      <a href="#talk">Talk to it</a>
+      <a href="#safety">Safety</a>
+      <a href="#how">How it works</a>
+      <a href="#demo">Demo</a>
+    </nav>
+    <a class="gh" href="https://github.com/swilled/blip" target="_blank" rel="noopener">GitHub ↗</a>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-h">
+      <div class="hero-copy">
+        <p class="pill"><span class="dot" aria-hidden="true"></span> Built at SwampHacks 2026</p>
+        <h1 id="hero-h">The web,<br><span class="blue">out loud.</span></h1>
+        <p class="sub">Blip is a voice agent for blind and low-vision people. Browse, read, write and fill out forms on any website, just by talking. It works alongside your screen reader, and never acts on anything important without your exact words.</p>
+        <div class="cta">
+          <a class="btn primary" href="#demo">Watch the demo</a>
+          <a class="btn soft" href="https://github.com/swilled/blip" target="_blank" rel="noopener">Get it on GitHub</a>
+        </div>
+      </div>
+
+      <div class="app" aria-label="Interactive example of a Blip conversation">
+        <div class="app-head"><span class="logo small" aria-hidden="true">bl<span class="i">ı<i></i></span>p</span><label class="sound"><input type="checkbox" id="sound"> speak replies</label></div>
+        <div class="listen">
+          <span class="orb" id="orb" aria-hidden="true"><i></i><i></i><i></i></span>
+          <div><b id="state">Ready</b><span id="hint">Hold the button, or hold Space on it.</span></div>
+        </div>
+        <ol class="log" id="log" aria-live="polite" aria-label="Conversation"></ol>
+        <button class="talk" id="talk" type="button" aria-describedby="hint">Hold to talk</button>
+        <p class="tiny">A scripted example. Blip itself runs on your computer.</p>
+      </div>
+    </section>
+
+    <section class="problem" aria-labelledby="problem-h">
+      <div class="wrap">
+        <p class="eyebrow">Why Blip</p>
+        <h2 id="problem-h">The web was built to be <em>seen.</em></h2>
+        <div class="stat reveal">
+          <b data-count="95.9" data-decimals="1" data-suffix="%">95.9%</b>
+          <p>of the top million home pages have detectable accessibility failures. <a href="https://webaim.org/projects/million/" target="_blank" rel="noopener">WebAIM Million, 2026</a></p>
+        </div>
+        <div class="garble reveal" role="img" aria-label="What a screen reader often hears: button, button, unlabeled, img_4021.png">
+          <span aria-hidden="true">“button,</span> <span aria-hidden="true">button,</span> <span aria-hidden="true">unlabeled,</span> <span aria-hidden="true">img_4021.png”</span>
+        </div>
+        <p class="turn reveal">Screen readers read what a page <em>says</em>. Blip understands what it <em>means</em>, then lets you act on it in plain language.</p>
+      </div>
+    </section>
+
+    <section class="features" id="features" aria-labelledby="features-h">
+      <div class="wrap">
+        <p class="eyebrow">What it does</p>
+        <h2 id="features-h">Four things, all by voice.</h2>
+        <div class="cards">
+          <article class="card reveal">
+            <img src="media/img/draft.webp" srcset="media/img/draft-800w.webp 800w, media/img/draft.webp 1280w" sizes="(max-width: 760px) calc(100vw - 32px), 640px" width="1280" height="720" alt="An email draft written by voice, waiting for the words 'send this email'" loading="lazy">
+            <h3>Read and reply</h3>
+            <p>Ask for your latest email and Blip switches to the right tab, finds it and reads it. Dictate a reply, change it in your own words, and hear the final draft before anything is sent.</p>
+          </article>
+          <article class="card reveal">
+            <img src="media/img/montage.webp" srcset="media/img/montage-800w.webp 800w, media/img/montage.webp 1280w" sizes="(max-width: 760px) calc(100vw - 32px), 640px" width="1280" height="720" alt="Four cards: summarize, search, find on page and switch tabs" loading="lazy">
+            <h3>Ask about any page</h3>
+            <p>Summaries, site search, find on page, scrolling, links and tabs. Blip works from what's actually on the page, and tells you when it isn't sure.</p>
+          </article>
+          <article class="card reveal">
+            <img src="media/img/forms.webp" srcset="media/img/forms-800w.webp 800w, media/img/forms.webp 1280w" sizes="(max-width: 760px) calc(100vw - 32px), 640px" width="1280" height="720" alt="A form with unlabeled fields that Blip names and fills" loading="lazy">
+            <h3>Fill any form, even broken ones</h3>
+            <p>Blip names unlabeled fields from the page structure, says when it had to guess, fills them from your local profile, and reads every value back before you submit.</p>
+          </article>
+          <article class="card reveal">
+            <img src="media/img/customize.webp" srcset="media/img/customize-800w.webp 800w, media/img/customize.webp 1280w" sizes="(max-width: 760px) calc(100vw - 32px), 640px" width="1280" height="720" alt="Settings: Blip voice or NVDA, speech speed 1.5x, and docking the window to a screen edge" loading="lazy">
+            <h3>Make it yours</h3>
+            <p>Speak through NVDA or Blip's own voice. Say “faster” or “slower” any time, and dock the Blip window to any edge of the screen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="talk-sec" id="talk" aria-labelledby="talk-h">
+      <div class="wrap">
+        <p class="eyebrow">Talk to it</p>
+        <h2 id="talk-h">Say it like you'd say it.</h2>
+        <p class="lede">Hold <kbd>Right Ctrl</kbd> + <kbd>Space</kbd> anywhere, speak, and let go. Or type. Pick a phrase to hear how Blip answers.</p>
+        <div class="phrases" id="phrases" role="list"></div>
+        <div class="answer" id="answer" aria-live="polite"><span class="who">blip</span><span id="answer-text">Pick a phrase above.</span></div>
+      </div>
+    </section>
+
+    <section class="safety" id="safety" aria-labelledby="safety-h">
+      <div class="wrap safety-in">
+        <div>
+          <p class="eyebrow lock">Safety</p>
+          <h2 id="safety-h">A bare “yes” is never enough.</h2>
+          <p>When an action matters, like sending, submitting or opening a new site, Blip tells you exactly what to say. Nothing important happens on a guess, a mishear or a stray “okay”.</p>
+          <button class="btn lock-btn" id="replay-safety" type="button">Play it again</button>
+        </div>
+        <ol class="chat" id="safety-chat" aria-live="polite" aria-label="Example of an exact-words confirmation"></ol>
+      </div>
+    </section>
+
+    <section class="how" id="how" aria-labelledby="how-h">
+      <div class="wrap">
+        <p class="eyebrow">How it works</p>
+        <h2 id="how-h">One place acts. Everything else listens.</h2>
+        <div class="flow reveal" role="img" aria-label="Diagram: you hold Right Ctrl and Space to talk to the Blip window, which runs on-device speech. It talks to the Blip server over a local WebSocket, which runs the conversation and safety checks and is the one place that acts. The server talks to the browser extension over another local WebSocket; the extension reads pages and acts on tabs.">
+          <div class="node you"><span class="ico" aria-hidden="true">●</span><b>You</b><small>hold Right Ctrl + Space</small></div>
+          <div class="wire" aria-hidden="true"><i></i></div>
+          <div class="node"><b>Blip window</b><small>on-device speech in and out, or NVDA</small></div>
+          <div class="wire" aria-hidden="true"><i></i><span>local WebSocket</span></div>
+          <div class="node core"><b>Blip server</b><small>conversation · safety checks · the one place that acts</small></div>
+          <div class="wire" aria-hidden="true"><i></i><span>local WebSocket</span></div>
+          <div class="node"><b>Browser extension</b><small>reads pages · acts on tabs</small></div>
+        </div>
+        <p class="note">Speech recognition (Moonshine) and Blip's voice (Kokoro) run on your device and work offline after a one-time download.</p>
+      </div>
+    </section>
+
+    <section class="demo" id="demo" aria-labelledby="demo-h">
+      <div class="wrap">
+        <p class="eyebrow">Demo</p>
+        <h2 id="demo-h">Fifty seconds, start to finish.</h2>
+        <figure class="player" id="blip-video" data-title="Blip demo"
+                data-chapters='[[0,"the problem"],[13,"what if you could just say"],[16,"meet blip"],[20,"read &amp; reply"],[36,"ask about any page"],[38,"fill any form"],[42,"make it yours"],[46,"outro"]]'
+                data-thumbs="media/blip-thumbs.webp" data-thumb-cols="10" data-duration="50">
+          <video src="media/blip-demo.mp4" poster="media/blip-poster.webp" preload="none" controls playsinline></video>
+        </figure>
+        <div class="player-chapters" data-for="blip-video"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <span class="logo" aria-hidden="true">bl<span class="i">ı<i></i></span>p</span>
+      <p>Built at SwampHacks 2026. MIT licensed. More from <a href="../">Pranav Sivakumar</a>. This page: <span data-weight>measuring…</span>.</p>
+      <nav class="foot-nav" aria-label="More work"><a class="back" href="../">← portfolio</a><a class="back" href="../gexlab/">next: GEXLab →</a></nav>
+    </div>
+  </footer>
+
+  <script src="player.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../js/qol.js" defer></script>
+</body>
+</html>

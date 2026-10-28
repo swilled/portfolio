@@ -1,0 +1,7 @@
+reports/
+research_notes/
+_*.html
+dist/
+.claude/
+.wrangler/
+__pycache__/

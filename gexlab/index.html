@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GEXLab · the market desk, explained</title>
+  <meta name="description" content="GEXLab is a self-hosted research workbench: macro conditions, options structure and market history in one interface, with every number reproducible.">
+  <meta name="theme-color" content="#f4f1ea">
+  <meta property="og:title" content="GEXLab · the market desk, explained">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="pranav@uf">
+  <meta property="og:description" content="GEXLab is a self-hosted research workbench: macro conditions, options structure and market history in one interface, with every number reproducible.">
+  <link rel="canonical" href="https://pranavsivakumar.pages.dev/gexlab/">
+  <meta property="og:url" content="https://pranavsivakumar.pages.dev/gexlab/">
+  <meta property="og:image" content="https://pranavsivakumar.pages.dev/gexlab/media/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GEXLab · the market desk, explained">
+  <meta name="twitter:description" content="GEXLab is a self-hosted research workbench: macro conditions, options structure and market history in one interface, with every number reproducible.">
+  <meta name="twitter:image" content="https://pranavsivakumar.pages.dev/gexlab/media/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2318211f'/%3E%3Cpath d='M4 11V8M7 11V5M10 11V7M12 11V3' stroke='%23f4f1ea' stroke-width='1.6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="player.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../css/qol.css">
+  <script>/* a page-to-page wipe the browser cancels (say, on a prerendered page) is fine: navigation still happens, so don't log it as an error */
+    ['pageswap', 'pagereveal'].forEach((t) => addEventListener(t, (e) => { const v = e.viewTransition; if (v) [v.ready, v.finished, v.updateCallbackDone].forEach((p) => p.catch(() => {})); }));</script>
+  <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"#\"], [href$=\".pdf\"], [target=_blank], [download], [href^=\"mailto:\"]"}}]},"eagerness":"moderate"}]}</script>
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="#top" aria-label="GEXLab home"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13V9M6.5 13V5M10 13V7.5M13 13V3"/></svg><span>GEXLAB</span><sup>v3</sup></a>
+    <nav aria-label="Sections">
+      <a href="#macro">Macro</a>
+      <a href="#options">Options</a>
+      <a href="#limits">Limits</a>
+      <a href="#reel">Showreel</a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-label="Switch to dark theme"><span class="sun">light</span><span class="moon">dark</span></button>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-h">
+      <canvas id="surface" aria-hidden="true"></canvas>
+      <div class="hero-copy">
+        <p class="kicker">GEXLab · research workbench for NQ / ES</p>
+        <h1 id="hero-h">Every market has a <em>shape.</em></h1>
+        <p class="sub">GEXLab puts macro conditions, index options structure and market history in one self-hosted desk, and it explains the data and its limits instead of handing you a signal. I built it to answer one question: why does price keep stalling at the same levels?</p>
+        <div class="cta">
+          <a class="btn solid" href="#reel">Watch the showreel</a>
+          <a class="btn ghost" href="#limits">Read the fine print</a>
+        </div>
+      </div>
+      <p class="hero-note">fig. 0 · a dealer gamma surface across strike and expiry, redrawn live</p>
+    </section>
+
+    <section class="band" id="macro" aria-labelledby="macro-h">
+      <div class="chapter">
+        <aside class="index" aria-hidden="true"><span>01</span>Macro</aside>
+        <div class="text reveal">
+          <p class="eyebrow">Macro regime · official observations</p>
+          <h2 id="macro-h">What is driving the market environment?</h2>
+          <p>A six-pillar score reads growth, inflation, policy, liquidity, credit and volatility, then places the economy on a growth-versus-inflation map. The trail shows how it got there.</p>
+          <p class="aside">It says what could change the call, and that it uses revised releases rather than point-in-time data. It's context, not a trade signal.</p>
+        </div>
+        <figure class="viz reveal">
+          <svg id="quad" viewBox="0 0 520 380" role="img" aria-label="Animated macro regime map: the current reading moves from slowdown into reflation">
+            <rect class="q q1" x="40" y="20" width="230" height="160" rx="8"/><rect class="q q2" x="276" y="20" width="230" height="160" rx="8"/>
+            <rect class="q q3" x="40" y="186" width="230" height="160" rx="8"/><rect class="q q4" x="276" y="186" width="230" height="160" rx="8"/>
+            <text x="56" y="44">DISINFLATIONARY SLOWDOWN</text><text x="292" y="44" class="t-c">DISINFLATIONARY EXPANSION</text>
+            <text x="56" y="334" class="t-s">STAGFLATION</text><text x="292" y="334" class="t-w">REFLATION</text>
+            <text x="40" y="372" class="axis">GROWTH SLOWING</text><text x="506" y="372" class="axis" text-anchor="end">GROWTH IMPROVING</text>
+            <path id="trail" d="M150 120 C 190 150, 230 210, 262 230 S 330 250, 352 232"/>
+            <circle cx="150" cy="120" r="5" class="past"/><circle cx="262" cy="230" r="5" class="past"/>
+            <g id="now" transform="translate(352 232)"><circle r="18" class="halo"/><circle r="8" class="dot"/><text x="16" y="-14" class="now-t">NOW</text><text x="16" y="4" class="read">growth 63</text><text x="16" y="20" class="read">inflation 42</text></g>
+          </svg>
+          <figcaption>Illustrative reading. The app plots the live composite.</figcaption>
+        </figure>
+      </div>
+      <button class="shot reveal" type="button" data-full="media/shots/macro-live.webp" aria-label="Enlarge screenshot of the macro regime page">
+        <img src="media/shots/macro-live.webp" srcset="media/shots/macro-live-800w.webp 800w, media/shots/macro-live.webp 1440w" sizes="(max-width: 760px) calc(100vw - 32px), 640px" width="1440" height="1200" alt="GEXLab macro regime page showing a Reflation call with 55% confidence and a growth and inflation quadrant" loading="lazy">
+      </button>
+    </section>
+
+    <section class="band alt" id="options" aria-labelledby="options-h">
+      <div class="chapter">
+        <aside class="index" aria-hidden="true"><span>02</span>Options</aside>
+        <div class="text reveal">
+          <p class="eyebrow">Dealer exposure · SPX / NDX</p>
+          <h2 id="options-h">Where dealers have to hedge.</h2>
+          <p>Gamma exposure by strike shows where options dealers are forced to buy or sell as price moves. Those strikes tend to act as walls and magnets, and GEXLab extracts them as levels.</p>
+          <dl class="levels">
+            <div><dt>call wall</dt><dd>largest positive gamma above spot</dd></div>
+            <div><dt>gamma flip</dt><dd>where dealer hedging changes sign</dd></div>
+            <div><dt>put wall</dt><dd>largest negative gamma below spot</dd></div>
+          </dl>
+        </div>
+        <figure class="viz reveal">
+          <svg id="gex" viewBox="0 0 520 380" role="img" aria-label="Animated gamma exposure profile by strike with call wall, gamma flip and put wall"></svg>
+          <figcaption>Illustrative profile. Bars grow left for short gamma, right for long.</figcaption>
+        </figure>
+      </div>
+      <div class="pair">
+        <button class="shot reveal" type="button" data-full="media/shots/profile-peaks.webp" aria-label="Enlarge screenshot of the exposure profile"><img src="media/shots/profile-peaks.webp" srcset="media/shots/profile-peaks-800w.webp 800w, media/shots/profile-peaks-1600w.webp 1600w, media/shots/profile-peaks.webp 2352w" sizes="(max-width: 760px) calc(100vw - 32px), 640px" width="2352" height="1292" alt="Exposure profile with peaks marked at key strikes" loading="lazy"></button>
+        <button class="shot reveal" type="button" data-full="media/shots/surface-grid.webp" aria-label="Enlarge screenshot of the volatility surface grid"><img src="media/shots/surface-grid.webp" srcset="media/shots/surface-grid-800w.webp 800w, media/shots/surface-grid-1600w.webp 1600w, media/shots/surface-grid.webp 2640w" sizes="(max-width: 760px) calc(100vw - 32px), 640px" width="2640" height="1018" alt="Implied volatility surface as a strike by expiry grid" loading="lazy"></button>
+      </div>
+    </section>
+
+    <section class="band" id="vol" aria-labelledby="vol-h">
+      <div class="chapter">
+        <aside class="index" aria-hidden="true"><span>03</span>Volatility</aside>
+        <div class="text reveal">
+          <p class="eyebrow">Surface · smile · term structure</p>
+          <h2 id="vol-h">17.5% at the money, 0DTE.</h2>
+          <p>Implied volatility across every strike and expiry, read three ways: the full surface, the smile at one expiry, and the term structure across expiries.</p>
+        </div>
+        <figure class="viz reveal">
+          <svg id="smile" viewBox="0 0 520 300" role="img" aria-label="Animated volatility smile that steepens and flattens"></svg>
+          <figcaption>A smile, breathing. Puts are bid, so the left side sits higher.</figcaption>
+        </figure>
+      </div>
+      <button class="shot wide reveal" type="button" data-full="media/shots/surface-smile.webp" aria-label="Enlarge screenshot of the volatility smile view"><img src="media/shots/surface-smile.webp" srcset="media/shots/surface-smile-800w.webp 800w, media/shots/surface-smile-1600w.webp 1600w, media/shots/surface-smile.webp 2640w" sizes="(max-width: 760px) calc(100vw - 32px), 1200px" width="2640" height="768" alt="Volatility smile charts across several expiries" loading="lazy"></button>
+    </section>
+
+    <section class="band alt" id="history" aria-labelledby="history-h">
+      <div class="chapter single">
+        <aside class="index" aria-hidden="true"><span>04</span>History</aside>
+        <div class="text reveal">
+          <p class="eyebrow">Events · history · equity desk</p>
+          <h2 id="history-h">Context, with receipts.</h2>
+          <p>An event calendar for high-impact releases, macro history over time, and an experimental equity desk with fundamentals, estimates, options and ownership. Source observations and versioned calculations are stored separately in SQLite, so any number can be traced and reproduced.</p>
+        </div>
+      </div>
+      <div class="pair">
+        <button class="shot reveal" type="button" data-full="media/shots/event-calendar.webp" aria-label="Enlarge screenshot of the event calendar"><img src="media/shots/event-calendar.webp" srcset="media/shots/event-calendar-800w.webp 800w, media/shots/event-calendar-1600w.webp 1600w, media/shots/event-calendar.webp 3000w" sizes="(max-width: 760px) calc(100vw - 32px), 1200px" width="3000" height="1520" alt="Event calendar showing the week's high-impact macro releases" loading="lazy"></button>
+        <button class="shot reveal" type="button" data-full="media/shots/macro-history.webp" aria-label="Enlarge screenshot of macro history"><img src="media/shots/macro-history.webp" srcset="media/shots/macro-history-800w.webp 800w, media/shots/macro-history.webp 1440w" sizes="(max-width: 760px) calc(100vw - 32px), 640px" width="1440" height="1200" alt="Macro history page with the regime over time" loading="lazy"></button>
+      </div>
+    </section>
+
+    <section class="limits" id="limits" aria-labelledby="limits-h">
+      <div class="limits-in reveal">
+        <p class="eyebrow">The fine print, up front</p>
+        <h2 id="limits-h">Research software, <em>not</em> a trading system.</h2>
+        <blockquote>
+          <p>“At the last local review, the daily direction model did not beat its saved out-of-sample baseline.”</p>
+          <cite>— the GEXLab README, which says so on the first screen</cite>
+        </blockquote>
+        <p>Data can be delayed, revised, incomplete or unavailable. Forecast outputs are research artifacts, not recommendations. GEXLab is built to show you what it knows, what it doesn't, and how fresh each input is.</p>
+      </div>
+    </section>
+
+    <section class="stack" aria-labelledby="stack-h">
+      <div class="chapter single">
+        <aside class="index" aria-hidden="true"><span>05</span>Build</aside>
+        <div class="text reveal">
+          <p class="eyebrow">Under the hood</p>
+          <h2 id="stack-h">Self-hosted, end to end.</h2>
+        </div>
+      </div>
+      <dl class="spec reveal">
+        <div><dt>interface</dt><dd>Next.js · React · TypeScript</dd></div>
+        <div><dt>services</dt><dd>FastAPI · Python</dd></div>
+        <div><dt>storage</dt><dd>SQLite, observations and calculations versioned apart</dd></div>
+        <div><dt>chart bridge</dt><dd>TradingView Pine · MotiveWave Java studies</dd></div>
+        <div><dt>modes</dt><dd>live and replay, with snapshot storage</dd></div>
+        <div><dt>runs on</dt><dd>your machine · Docker compose included</dd></div>
+      </dl>
+    </section>
+
+    <section class="reel" id="reel" aria-labelledby="reel-h">
+      <div class="reel-in">
+        <p class="eyebrow">Showreel</p>
+        <h2 id="reel-h">One minute, ten views.</h2>
+        <figure class="player" id="gexlab-video" data-title="GEXLab showreel"
+                data-chapters='[[0,"intro"],[11,"macro regime"],[15,"dealer hedging"],[22,"vol surface"],[26,"range day"],[30,"positioning"],[34,"events"],[38,"cross-asset"],[43,"equity desk"],[50,"montage"]]'
+                data-thumbs="media/gexlab-thumbs.webp" data-thumb-cols="10" data-duration="60">
+          <video src="media/gexlab-demo.mp4" poster="media/gexlab-poster.webp" preload="none" controls playsinline></video>
+        </figure>
+        <div class="player-chapters" data-for="gexlab-video"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>GEXLab is designed and built by <a href="../">Pranav Sivakumar</a>. <a href="https://github.com/swilled/gexlab" target="_blank" rel="noopener">Source on GitHub ↗</a> · this page: <span data-weight>measuring…</span></p>
+    <nav class="foot-nav" aria-label="More work"><a class="back" href="../">← portfolio</a><a class="back" href="../#hypothesize">next: Hypothesize →</a></nav>
+  </footer>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Screenshot">
+    <img id="lightbox-img" alt="">
+    <button type="button" class="close" id="lightbox-close" aria-label="Close">close ✕</button>
+  </dialog>
+
+  <script src="player.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="../js/qol.js" defer></script>
+</body>
+</html>

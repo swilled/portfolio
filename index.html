@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>
+    // pick the theme before anything paints: a saved choice wins, otherwise night
+    (() => { let t = null; try { t = localStorage.getItem('theme'); } catch (e) {}
+      document.documentElement.dataset.theme = t || 'dark'; })();
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pranav Sivakumar · data science + economics @ UF</title>
+  <meta name="description" content="Pranav Sivakumar, data science and economics student at the University of Florida. I build fast software, data tools and voice interfaces.">
+  <meta name="theme-color" content="#0f0c16">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="pranav@uf">
+  <meta property="og:title" content="Pranav Sivakumar">
+  <meta property="og:description" content="Data science + economics @ UF. A charting platform, a voice assistant, research tools, and a terminal you can talk to.">
+  <link rel="canonical" href="https://pranavsivakumar.pages.dev/">
+  <meta property="og:url" content="https://pranavsivakumar.pages.dev/">
+  <meta property="og:image" content="https://pranavsivakumar.pages.dev/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pranav Sivakumar">
+  <meta name="twitter:description" content="Data science + economics @ UF. A charting platform, a voice assistant, research tools, and a terminal you can talk to.">
+  <meta name="twitter:image" content="https://pranavsivakumar.pages.dev/assets/og.png">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/player.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script>/* a page-to-page wipe the browser cancels (say, on a prerendered page) is fine: navigation still happens, so don't log it as an error */
+    ['pageswap', 'pagereveal'].forEach((t) => addEventListener(t, (e) => { const v = e.viewTransition; if (v) [v.ready, v.finished, v.updateCallbackDone].forEach((p) => p.catch(() => {})); }));</script>
+  <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[href^=\"#\"], [href$=\".pdf\"], [target=_blank], [download], [href^=\"mailto:\"]"}}]},"eagerness":"moderate"}]}</script>
+</head>
+<body>
+  <a class="skip" href="#work">skip to projects</a>
+
+  <!-- on wide screens the terminal sits on a desktop: a few icons on the left, a note on the right -->
+  <nav class="desktop" aria-label="Desktop shortcuts">
+    <a class="dicon" href="assets/resume.pdf" target="_blank" rel="noopener" data-icon="doc"><span>resume.pdf</span></a>
+    <a class="dicon" href="#work" data-icon="folder"><span>projects/</span></a>
+    <a class="dicon" href="life/" data-icon="folder"><span>life/</span></a>
+    <a class="dicon" href="mailto:pranav.sivakumar@ufl.edu" data-link="email" data-icon="mail"><span>mail</span></a>
+    <a class="dicon" href="https://github.com/swilled" target="_blank" rel="noopener" data-link="github" data-icon="github"><span>github</span></a>
+    <a class="dicon" href="https://www.linkedin.com/in/pranavsivakumar" target="_blank" rel="noopener" data-link="linkedin" data-icon="linkedin"><span>linkedin</span></a>
+    <button class="dicon trash" type="button" data-icon="trash" id="trash"><span>trash</span></button>
+  </nav>
+  <aside class="note" aria-label="todo.txt">
+    <p class="note-title">todo.txt</p>
+    <ul>
+      <li class="done">build this site</li>
+      <li>summit mt rainier</li>
+      <li>beat pranav at pickleball <span>(type pickleball)</span></li>
+      <li>find the konami code</li>
+    </ul>
+  </aside>
+
+  <div class="window">
+  <header class="titlebar">
+    <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <a class="host" href="#top">pranav@uf: ~</a>
+    <nav aria-label="Sections">
+      <a href="#work">projects</a>
+      <a href="#experience">experience</a>
+      <a href="#about">about</a>
+      <a href="#contact">contact</a>
+      <a class="nav-life" href="life/">~/life</a>
+      <a class="nav-resume" href="assets/resume.pdf" target="_blank" rel="noopener">résumé ↓</a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-label="Switch between night (terminal) and day (printout)"><span class="night"><i></i><b>night</b></span><span class="day"><i></i><b>day</b></span></button>
+    <span class="tty" id="tty" aria-hidden="true">zsh · 120×40</span>
+  </header>
+
+  <main>
+    <section class="hero" id="top" aria-labelledby="name">
+      <canvas class="hero-bg" id="hero-bg" aria-hidden="true"></canvas>
+      <div class="wrap hero-inner">
+        <p class="cmd"><span class="ps">pranav@uf</span> <span class="cwd">~</span> <span class="dollar">$</span> <span class="typed" data-type>talk pranav</span></p>
+        <div class="fetch">
+          <div class="hero-avatar">
+            <span class="bubble" id="bubble" aria-hidden="true">hey, i'm pranav!</span>
+            <div class="rig" id="rig"><svg id="avatar" class="avatar" role="img" aria-label="Pixel-art Pranav. Click him, or pick him up." shape-rendering="crispEdges" tabindex="0"></svg></div>
+            <span class="ground" aria-hidden="true"></span>
+          </div>
+          <div class="fetch-info">
+            <p class="userhost"><span class="ps">pranav</span>@<span class="amber">uf</span></p>
+            <h1 id="name" class="name" aria-label="Pranav Sivakumar"><span data-scramble aria-hidden="true">Pranav</span> <span data-scramble aria-hidden="true">Sivakumar</span></h1>
+            <div class="chat" id="chat">
+              <ol class="chat-log" id="chat-log" aria-live="polite" aria-label="Conversation" tabindex="0">
+                <li class="me"><span class="nick">pranav</span><span class="msg">hey! i'm a sophomore at <span class="uf" data-uf></span>UF studying data science + economics. i build fast software, data tools and voice interfaces, mostly in python, typescript and rust, and i ship with AI (claude code, codex, antigravity) every day.</span></li>
+              </ol>
+              <div class="chat-att" id="chat-att" aria-live="polite"></div>
+              <div class="chat-asks" id="chat-asks" role="group" aria-label="Ask Pranav something">
+                <button type="button" data-ask="built">what have you built?</button>
+                <button type="button" data-ask="stack">your stack?</button>
+                <button type="button" data-ask="commits">how active are you?</button>
+                <button type="button" data-ask="ai">how do you use AI?</button>
+                <button type="button" data-ask="background">background?</button>
+                <button type="button" data-ask="fun">for fun?</button>
+              </div>
+              <form class="chat-input" id="chat-form" autocomplete="off">
+                <label class="nick you" for="chat-q">you</label>
+                <input id="chat-q" type="text" maxlength="120" spellcheck="false" placeholder="ask me anything…">
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="run">
+          <span class="cmd inline" aria-hidden="true"><span class="ps">pranav@uf</span> <span class="cwd">~</span> <span class="dollar">$</span></span>
+          <div class="actions">
+            <a class="btn primary" href="assets/resume.pdf" target="_blank" rel="noopener" title="updated oct 2026"><kbd>r</kbd> open resume.pdf <small class="upd">oct 2026</small></a>
+            <a class="btn" data-link="email" href="mailto:pranav.sivakumar@ufl.edu"><kbd>e</kbd> mail</a>
+            <a class="btn ghost" data-link="github" href="https://github.com/swilled" target="_blank" rel="noopener">github ↗</a>
+            <a class="btn ghost" data-link="linkedin" href="https://www.linkedin.com/in/pranavsivakumar" target="_blank" rel="noopener">linkedin ↗</a>
+          </div>
+          <span class="caret" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="stack" id="stack" aria-labelledby="stack-h">
+      <div class="wrap">
+        <p class="cmd reveal"><span class="ps">pranav@uf</span> <span class="cwd">~</span> <span class="dollar">$</span> <span class="typed" data-type>cat stack.txt</span></p>
+        <h2 id="stack-h" class="section-title reveal">What I build with</h2>
+      </div>
+      <div class="marquee" data-icons="python typescript javascript rust cpp sql r" aria-label="Languages"></div>
+      <div class="marquee reverse" data-icons="react nextjs nodejs tailwind fastapi tauri postgres redis supabase docker aws vercel git github" aria-label="Web, backend and infrastructure"></div>
+      <div class="marquee" data-icons="pandas numpy polars duckdb scikit pytorch jupyter sqlite openai claude huggingface" aria-label="Data and AI"></div>
+    </section>
+
+    <section class="work wrap" id="work" aria-labelledby="work-h">
+      <p class="cmd reveal"><span class="ps">pranav@uf</span> <span class="cwd">~</span> <span class="dollar">$</span> <span class="typed" data-type>ls -l projects/</span></p>
+      <h2 id="work-h" class="section-title reveal">Selected work</h2>
+      <ul class="ls reveal" aria-label="Project index">
+        <li><a href="#speed"><span class="perm">drwxr-xr-x</span><span class="fn">speed/</span><span class="ty">charting platform</span><span class="st">rust · wasm · typescript</span></a></li>
+        <li><a href="#blip"><span class="perm">drwxr-xr-x</span><span class="fn">blip/</span><span class="ty">voice agent</span><span class="st">chrome ext · node · websockets</span></a></li>
+        <li><a href="#gexlab"><span class="perm">drwxr-xr-x</span><span class="fn">gexlab/</span><span class="ty">data workbench</span><span class="st">next.js · fastapi · sqlite</span></a></li>
+        <li><a href="#hypothesize"><span class="perm">drwxr-xr-x</span><span class="fn">hypothesize/</span><span class="ty">llm pipeline</span><span class="st">python · polars · pymupdf</span></a></li>
+        <li><a href="#spotifind"><span class="perm">drwxr-xr-x</span><span class="fn">spotifind/</span><span class="ty">recommender</span><span class="st">python · pandas · streamlit</span></a></li>
+        <li><a href="#velo"><span class="perm">drwx------</span><span class="fn">velo/</span><span class="ty">research desk</span><span class="st">private · building</span></a></li>
+      </ul>
+
+      <section class="building reveal" id="velo" aria-labelledby="velo-h">
+        <div class="b-grid">
+          <div class="b-text">
+          <p class="b-head"><span class="b-dot" aria-hidden="true"></span>currently building</p>
+          <h3 id="velo-h">Velo Research</h3>
+          <p class="b-lead">A quantitative research desk running systematic strategies. Ideas come from two places: my own, which is where the best ones have come from, and Hypothesize, which reads more research than I ever could. Every idea faces the same tests wherever it came from, and the few that survive trade through Speed.</p>
+          <p class="visually-hidden">Pipeline: ideas come from me and from Hypothesize; every one goes through the same testing, where most die; survivors are forward tested on data they never saw, then trade through Speed.</p><pre class="b-flow" aria-hidden="true">my ideas ─────────┐
+                  ├──▶ testing ──▶ forward tests ──▶ <a tabindex="-1" href="#speed">speed</a>
+<a tabindex="-1" href="#hypothesize">hypothesize</a> ──────┘       │          │                 │
+                       most ideas  on data they      survivors
+                       die here    never saw         trade here</pre>
+          <ul class="b-rules">
+            <li>costs are assumed high, so thin edges die in testing, not in the market</li>
+            <li>nothing trades until it holds up on data it was never fit to</li>
+            <li>the details stay private</li>
+          </ul>
+          </div>
+          <figure class="b-art">
+            <canvas id="velo-funnel" role="img" aria-label="A turning 3D funnel drawn in ASCII: ideas from two sources, mine and Hypothesize's, pour in at the top; most die on the way down, and the rare survivor runs out the bottom to Speed."></canvas>
+            <figcaption>drag to turn it</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <article class="project reveal" id="speed">
+        <div class="media">
+          <figure class="player" id="speed-video" data-title="Speed demo"
+                  data-chapters='[[0,"intro"],[5,"charting"],[23,"order book"],[27,"bid × ask heatmap"],[30,"time &amp; sales"],[34,"volume profile"],[38,"strategy replay"],[46,"multi-chart"],[56,"outro"]]'
+                  data-thumbs="speed/media/speed-thumbs.webp" data-thumb-cols="10" data-duration="60"
+                  data-next-label="Blip" data-next-href="#blip">
+            <video src="speed/media/speed-demo.mp4" poster="speed/media/speed-poster.webp" preload="none" controls playsinline></video>
+          </figure>
+          <div class="player-chapters" data-for="speed-video"></div>
+        </div>
+        <div class="info">
+          <p class="kicker">01 · charting platform</p>
+          <h3>Speed</h3>
+          <p class="why-line">I used TradingView, Quantower, Deepcharts, MotiveWave and NinjaTrader. none of them met my bar, so I built the one that does.</p>
+          <p class="tagline">A charting platform meant to replace all of them: live charts, orderflow, drawing tools and order entry in one desktop app, as fast as the hardware allows.</p>
+          <ul class="points">
+            <li>Rust + Tauri host feeding a TypeScript/WebAssembly engine through a lock-free ring buffer and a 24-byte binary wire format.</li>
+            <li>Zero-allocation hot path holds 144–240Hz while thousands of updates a second arrive.</li>
+            <li>1,180+ unit and integration tests.</li>
+            <li>Where <a href="#velo">Velo Research</a>'s strategies trade.</li>
+          </ul>
+          <p class="tradeoff">tauri over electron keeps the app small, but WebView2's quirks are mine to fix. the slow part was never drawing: one scan of the gap list per tick made sparse feeds quadratic, and indexing it once per batch took 21 ms to 2.</p>
+          <p class="stackline">rust · tauri · typescript · webassembly · canvas/webgl</p>
+          <p class="links"><a class="go" href="speed/">project site ↗</a><a href="https://github.com/swilled/speed-web" target="_blank" rel="noopener" title="the source is private; this repo has the demo and commit activity">github ↗</a></p>
+        </div>
+      </article>
+
+      <article class="project flip reveal" id="blip">
+        <div class="media">
+          <figure class="player" id="blip-video" data-title="Blip demo"
+                  data-chapters='[[0,"the problem"],[13,"what if you could just say"],[16,"meet blip"],[20,"read &amp; reply"],[36,"ask about any page"],[38,"fill any form"],[42,"make it yours"],[46,"outro"]]'
+                  data-thumbs="blip/media/blip-thumbs.webp" data-thumb-cols="10" data-duration="50"
+                  data-next-label="GEXLab" data-next-href="#gexlab">
+            <video src="blip/media/blip-demo.mp4" poster="blip/media/blip-poster.webp" preload="none" controls playsinline></video>
+          </figure>
+          <div class="player-chapters" data-for="blip-video"></div>
+        </div>
+        <div class="info">
+          <p class="kicker">02 · voice agent · SwampHacks 2026</p>
+          <h3>Blip</h3>
+          <p class="why-line">screen readers make the web usable, but slowly. we wanted you to just say what you want done.</p>
+          <p class="tagline">A voice agent that lets blind and low-vision people browse, read, write and fill out forms on any website.</p>
+          <ul class="points">
+            <li>"Read my latest email. Reply: yes, see you then. Send it." One conversation, start to finish.</li>
+            <li>Runs in your own browser next to NVDA, with on-device speech in and out.</li>
+            <li>Never acts on anything important without your exact words.</li>
+          </ul>
+          <p class="tradeoff">on-device speech costs a one-time model download and some accuracy against cloud speech. in return nothing you say leaves your machine, and the model can route a request but never approve one.</p>
+          <p class="stackline">typescript · chrome extension · node.js · websockets</p>
+          <p class="links"><a class="go" href="blip/">project site ↗</a><a href="https://github.com/swilled/blip" target="_blank" rel="noopener">source ↗</a></p>
+        </div>
+      </article>
+
+      <article class="project reveal" id="gexlab">
+        <div class="media">
+          <figure class="player" id="gexlab-video" data-title="GEXLab showreel"
+                  data-chapters='[[0,"intro"],[11,"macro regime"],[15,"dealer hedging"],[22,"vol surface"],[26,"range day"],[30,"positioning"],[34,"events"],[38,"cross-asset"],[43,"equity desk"],[50,"montage"]]'
+                  data-thumbs="gexlab/media/gexlab-thumbs.webp" data-thumb-cols="10" data-duration="60"
+                  data-next-label="Hypothesize" data-next-href="#hypothesize">
+            <video src="gexlab/media/gexlab-demo.mp4" poster="gexlab/media/gexlab-poster.webp" preload="none" controls playsinline></video>
+          </figure>
+          <div class="player-chapters" data-for="gexlab-video"></div>
+        </div>
+        <div class="info">
+          <p class="kicker">03 · data workbench</p>
+          <h3>GEXLab</h3>
+          <p class="why-line">I wanted to see why price kept stalling at the same levels, and every tool that showed it hid its math.</p>
+          <p class="tagline">A self-hosted workbench that puts options data, macro context and market history in one place, with every number reproducible.</p>
+          <ul class="points">
+            <li>Computes exposure, key levels, volatility surfaces and term structure from raw options chains.</li>
+            <li>Live and replay modes; every calculation is versioned in SQLite so any result can be rebuilt.</li>
+            <li>Honest about its limits: when a model doesn't beat its out-of-sample baseline, the app says so.</li>
+          </ul>
+          <p class="tradeoff">no api keys, only public sources, so anyone can run it. those sources change formats and go down, so it shows stale or missing data as stale or missing, never a guess.</p>
+          <p class="stackline">next.js · typescript · fastapi · python · sqlite</p>
+          <p class="links"><a class="go" href="gexlab/">project site ↗</a><a href="https://github.com/swilled/gexlab" target="_blank" rel="noopener">source ↗</a></p>
+        </div>
+      </article>
+
+      <article class="project flip reveal" id="hypothesize">
+        <div class="media">
+          <div class="viz" role="img" aria-label="Animation: papers, blogs and feeds flow into a funnel, become testable rules, get tested; most are rejected and logged with a reason, a few survive.">
+            <canvas id="viz-hypothesize"></canvas>
+            <span class="viz-tag">illustrative</span>
+          </div>
+        </div>
+        <div class="info">
+          <p class="kicker">04 · llm research pipeline</p>
+          <h3>Hypothesize</h3>
+          <p class="why-line">ideas are cheap online. I wanted something that kills the bad ones before anyone acts on them.</p>
+          <p class="tagline">A pipeline that reads papers and blog posts, turns their claims into testable hypotheses, then tries hard to break them.</p>
+          <ul class="points">
+            <li>Collects papers, blogs and RSS feeds and extracts candidate rules with an audit trail back to the source.</li>
+            <li>Tests every candidate on local data and ranks survivors with robust statistics.</li>
+            <li>Every rejected idea is logged with its reason, so a weak claim can't sneak through as a result.</li>
+            <li>One of <a href="#velo">Velo Research</a>'s two idea sources, alongside my own.</li>
+          </ul>
+          <p class="tradeoff">the bar is strict on purpose, so some real effects get thrown out. losing a few true ideas is cheaper than acting on noise.</p>
+          <p class="stackline">python · polars · pymupdf · sqlite</p>
+        </div>
+      </article>
+
+      <article class="project reveal" id="spotifind">
+        <div class="media">
+          <div class="viz" role="img" aria-label="Animation: a map of songs as pixels; one track links to its five most similar songs, with feature bars.">
+            <canvas id="viz-spotifind"></canvas>
+          </div>
+        </div>
+        <div class="info">
+          <p class="kicker">05 · recommender · class project</p>
+          <h3>Spotifind</h3>
+          <p class="why-line">my recommendations kept looping the same twenty songs.</p>
+          <p class="tagline">Music recommendations from audio features: pick a song, get the ones that sound most like it.</p>
+          <p class="tradeoff">audio features only, no listening history. it can't learn your taste, but it also never falls back to whatever's popular.</p>
+          <p class="stackline">python · pandas · streamlit</p>
+          <p class="links"><a href="https://github.com/swilled/spotifind" target="_blank" rel="noopener">source ↗</a></p>
+        </div>
+      </article>
+    </section>
+
+    <section class="wrap" id="experience" aria-labelledby="exp-h">
+      <p class="cmd reveal"><span class="ps">pranav@uf</span> <span class="cwd">~</span> <span class="dollar">$</span> <span class="typed" data-type>git log --graph --oneline career</span></p>
+      <h2 id="exp-h" class="section-title reveal">Experience</h2>
+      <ol class="log">
+        <li class="reveal"><span class="co" data-logo="intellizence" aria-hidden="true"></span><span class="hash">7be20d4</span><span class="when">may – aug 2026</span><span class="what"><b>Research Intern</b> · Intellizence <span class="head">HEAD</span></span><span class="why">Built and shipped MCP integrations that put Intellizence's data in AI-tool directories and marketplaces.</span></li>
+        <li class="reveal"><span class="co" data-logo="amazon" aria-hidden="true"></span><span class="hash">19c4e88</span><span class="when">jun – aug 2026</span><span class="what"><b>Delivery Station Associate</b> · Amazon</span><span class="why">High-volume last-mile operations against shift deadlines.</span></li>
+        <li class="reveal"><span class="co" data-logo="tutoringclub" aria-hidden="true"></span><span class="hash">e51a0b3</span><span class="when">dec 2024 – feb 2025</span><span class="what"><b>Tutor</b> · Tutoring Club</span><span class="why">One-to-one SAT math and verbal for five regular students. Every one improved; the biggest jump was 110 points.</span></li>
+        <li class="reveal"><span class="co" data-logo="policycon" aria-hidden="true"></span><span class="hash">0c9d27f</span><span class="when">jul – oct 2024</span><span class="what"><b>AI Integration Intern</b> · PolicyCON</span><span class="why">Matched AI tools to client-facing business operations.</span></li>
+      </ol>
+    </section>
+
+    <section class="wrap" id="about" aria-labelledby="about-h">
+      <p class="cmd reveal"><span class="ps">pranav@uf</span> <span class="cwd">~</span> <span class="dollar">$</span> <span class="typed" data-type>cat about.md</span></p>
+      <h2 id="about-h" class="section-title reveal">About</h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>I'm a sophomore at the University of Florida studying data science and economics.</p>
+          <p>Most of my projects started because I wanted a tool that didn't exist yet, or the one that did was too slow. I like work where the numbers have to hold up.</p>
+          <p>AI is part of how I build every day. I write code with Claude Code, Codex and Antigravity, I shipped MCP servers at Intellizence that put a company's data inside AI assistants, and Hypothesize uses LLMs to read research and turn it into something testable.</p>
+        </div>
+        <div class="about-side">
+          <div class="card reveal">
+            <p class="label">education</p>
+            <span class="uf-big" data-uf aria-hidden="true"></span>
+            <p><b>University of Florida</b><br>B.S. Data Science + B.S. Economics<br><span class="dim">expected may 2029</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="life-tree">
+        <p class="cmd reveal"><span class="ps">pranav@uf</span> <span class="cwd">~</span> <span class="dollar">$</span> <span class="typed" data-type>tree ~/life -L 1</span></p>
+        <ul class="tree reveal" aria-label="What I do off the clock">
+          <li class="root"><a href="life/">~/life</a><span class="dim">off the clock</span></li>
+          <li><span class="br" aria-hidden="true">├──</span><a href="life/#alpine">alpine/</a><span>Siyeh, Brown and Altyn this past summer. Rainier next, in <b data-rainier>a few months</b>.</span></li>
+          <li><span class="br" aria-hidden="true">├──</span><a href="life/#court">court/</a><span>tennis captain, district champs ×3. pickleball with friends now.</span></li>
+          <li><span class="br" aria-hidden="true">├──</span><a href="life/#track">track/</a><span>formula 1, mostly Lando. live pit wall + a lights-out reaction test.</span></li>
+          <li><span class="br" aria-hidden="true">├──</span><a href="life/#games">games/</a><span>minecraft pvp, rocket league and four more, on a pixel handheld.</span></li>
+          <li><span class="br" aria-hidden="true">└──</span><a href="life/#music">music/</a><span>a record crate: otuka, paramore, lucki, a$ap rocky. drop the needle.</span></li>
+          <li class="sum"><span class="dim">5 directories</span><a class="go" href="life/">cd ~/life →</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-h">
+      <canvas class="campus" id="campus" role="img" aria-label="Pixel art of the University of Florida at night: Century Tower, oak trees and Lake Alice."></canvas>
+      <div class="wrap">
+        <p class="cmd reveal"><span class="ps">pranav@uf</span> <span class="cwd">~</span> <span class="dollar">$</span> <span class="typed" data-type>ping pranav</span></p>
+        <pre class="ping reveal" aria-hidden="true">PING pranav.sivakumar@ufl.edu: 56 data bytes
+64 bytes from ufl.edu: icmp_seq=0 ttl=64 time=<span data-ttfb>0.42</span> ms</pre>
+        <h2 id="contact-h" class="contact-title reveal">Say hi.</h2>
+        <a class="contact-mail reveal" data-link="email" href="mailto:pranav.sivakumar@ufl.edu">pranav.sivakumar@ufl.edu</a>
+        <div class="actions reveal">
+          <a class="btn primary" href="assets/resume.pdf" target="_blank" rel="noopener"><kbd>r</kbd> open resume.pdf</a>
+          <a class="btn ghost" data-link="linkedin" href="https://www.linkedin.com/in/pranavsivakumar" target="_blank" rel="noopener">linkedin ↗</a>
+          <a class="btn ghost" data-link="github" href="https://github.com/swilled" target="_blank" rel="noopener">github ↗</a>
+        </div>
+        <p class="colophon reveal"><span class="dim">this page:</span> <span data-weight>measuring…</span><span class="dim"> · no framework, no cookies ·</span> <button type="button" data-cmd="colophon">cat colophon</button></p>
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <footer class="statusbar">
+    <span class="mode" id="mode">NORMAL</span>
+    <form class="prompt" id="prompt" autocomplete="off">
+      <label for="cmd" class="visually-hidden">Type a command</label>
+      <span class="dollar" aria-hidden="true">$</span>
+      <input id="cmd" name="cmd" type="text" spellcheck="false" placeholder="type a command, or press ? for help">
+    </form>
+    <span class="now" title="what I'm up to right now">now: sophomore year at UF, shipping Speed</span>
+    <span class="where" id="where" aria-hidden="true">~/</span>
+    <span class="pct" id="pct" aria-hidden="true">Top</span>
+    <span class="walker" id="walker" aria-hidden="true"></span>
+    <button class="pal-hint" type="button" data-palette-hint aria-label="Search the site"></button>
+    <span class="hints" aria-hidden="true"><kbd>r</kbd> résumé <kbd>p</kbd> projects <kbd>e</kbd> email <kbd>?</kbd> help</span>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/sprite.js" defer></script>
+  <script src="js/icons.js" defer></script>
+  <script src="js/fx.js" defer></script>
+  <script src="js/player.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/qol.js" defer></script>
+  <script src="js/resume.js" defer></script>
+</body>
+</html>

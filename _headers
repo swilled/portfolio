@@ -1,0 +1,25 @@
+# Cloudflare Pages response headers. serve.py reads this file too, so the local preview matches.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://*.mzstatic.com; media-src 'self' blob: https://*.apple.com https://*.mzstatic.com; connect-src 'self' https://cloudflareinsights.com https://github-contributions-api.jogruber.de https://itunes.apple.com https://api.jolpi.ca; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+
+# rules that match the same path get their values joined, so none of these overlap
+# fonts never change under the same name
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# video, screenshots, posters and the project pages' fonts: rarely change, a week is fine
+/*/media/*
+  Cache-Control: public, max-age=604800
+
+# css and js aren't fingerprinted: always revalidate (a cheap 304), so a deploy never pairs new html with old css
+/css/*
+  Cache-Control: public, max-age=0, must-revalidate
+/js/*
+  Cache-Control: public, max-age=0, must-revalidate
+/life/*
+  Cache-Control: public, max-age=0, must-revalidate
