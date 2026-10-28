@@ -429,7 +429,6 @@ kbd { font: 500 11px var(--mono); padding: 0 5px; border: 1.5px solid currentCol
 .marquee + .marquee { border-top: 1px dashed var(--line); }
 .marquee-track { display: flex; width: max-content; animation: marquee var(--dur, 40s) linear infinite; }
 .marquee.reverse .marquee-track { animation-direction: reverse; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 .tech { flex: none; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 124px; color: var(--dim); transition: color 160ms; }
 .tech svg { width: 48px; height: 48px; fill: currentColor; transition: transform 200ms var(--ease); }

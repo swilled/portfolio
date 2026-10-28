@@ -757,15 +757,15 @@
   window.addEventListener('load', sweep);
   sweep();
 
-  /* ---------- scroll: the marquee speeds up with you, a tiny you walks along the status bar ---------- */
+  /* ---------- scroll: the marquee hurries along with you, a tiny you walks along the status bar ---------- */
   const anims = [...document.querySelectorAll('.marquee-track')].map((t) => t.getAnimations && t.getAnimations()[0]).filter(Boolean);
   let vel = 0, lastY = window.scrollY, mqOn = false;
   const marqueeTick = () => {
     const dy = window.scrollY - lastY;
     lastY = window.scrollY;
     vel += (dy - vel) * 0.18;
-    // scrolling up runs the rows backwards
-    const rate = 1 + Math.max(-6, Math.min(7, vel * 0.3));
+    // any scroll, up or down, only ever speeds the rows along; they never stall or run backwards
+    const rate = 1 + Math.min(6, Math.abs(vel) * 0.3);
     anims.forEach((a) => { a.playbackRate = rate; });
     if (Math.abs(vel) > 0.05 || dy) requestAnimationFrame(marqueeTick);
     else { anims.forEach((a) => { a.playbackRate = 1; }); mqOn = false; }
