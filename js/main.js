@@ -677,7 +677,7 @@
   });
 
   /* ---------- tech marquee ---------- */
-  const LABELS = { nextjs: 'next.js', nodejs: 'node.js', scikit: 'scikit-learn', cpp: 'c++', huggingface: 'hugging face' };
+  const LABELS = { nextjs: 'next.js', nodejs: 'node.js', scikit: 'scikit-learn', cpp: 'c++', huggingface: 'hugging face', webassembly: 'wasm', chrome: 'chrome ext' };
   const SPEED = 38; // px per second, same for every row
   document.querySelectorAll('.marquee').forEach((m, row) => {
     if (!window.pixelIcon) return;
