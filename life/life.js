@@ -1055,15 +1055,28 @@
   const player = new Audio();
   player.crossOrigin = 'anonymous'; player.preload = 'none';
   try { player.preservesPitch = false; player.mozPreservesPitch = false; player.webkitPreservesPitch = false; } catch (e) {}
-  let actx = null, analyser = null, playing = false, current = -1, nowPlaying = '', heard = new Set();
+  let actx = null, analyser = null, gain = null, playing = false, current = -1, nowPlaying = '', heard = new Set();
+  // volume: remembered between visits; applied after the analyser so the record still dances when it's quiet
+  const volEl = document.getElementById('deck-vol'), volN = document.getElementById('deck-vol-n'), muteBtn = document.getElementById('deck-mute');
+  let vol = store.get('crate-vol') === null ? 0.7 : +store.get('crate-vol'), muted = false, beforeMute = 0.7;
+  const applyVol = () => {
+    const v = muted ? 0 : vol;
+    if (gain) gain.gain.value = v; else player.volume = v; // iOS ignores element volume, so the graph's gain does the work there
+    if (volEl) { volEl.value = Math.round(v * 100); volEl.style.setProperty('--v', `${Math.round(v * 100)}%`); }
+    if (volN) volN.textContent = Math.round(v * 100);
+    if (muteBtn) { muteBtn.textContent = v ? 'vol' : 'mute'; muteBtn.setAttribute('aria-pressed', String(!v)); muteBtn.setAttribute('aria-label', v ? 'Mute' : 'Unmute'); }
+  };
   const bins = new Uint8Array(32);
   const wire = () => {
     if (actx) return;
     try {
       actx = new (window.AudioContext || window.webkitAudioContext)();
       analyser = actx.createAnalyser(); analyser.fftSize = 64; analyser.smoothingTimeConstant = 0.7;
-      actx.createMediaElementSource(player).connect(analyser).connect(actx.destination);
-    } catch (e) { analyser = null; }
+      gain = actx.createGain();
+      actx.createMediaElementSource(player).connect(analyser).connect(gain).connect(actx.destination);
+      player.volume = 1;
+      applyVol();
+    } catch (e) { analyser = null; gain = null; }
   };
   // a cover, sampled down to a few pixels and posterized so it sits in the site's pixel world
   const pixelate = (img, n) => {
@@ -1159,6 +1172,13 @@
   player.addEventListener('ended', () => { playing = false; nextRecord(); });
   if (playBtn) playBtn.addEventListener('click', togglePlay);
   if (nextBtn) nextBtn.addEventListener('click', nextRecord);
+  applyVol();
+  if (volEl) volEl.addEventListener('input', () => { vol = volEl.value / 100; muted = false; store.set('crate-vol', String(vol)); applyVol(); });
+  if (muteBtn) muteBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // it sits inside the slider's label
+    if (muted || !vol) { muted = false; if (!vol) vol = beforeMute || 0.7; } else { beforeMute = vol; muted = true; }
+    applyVol();
+  });
 
   // the turntable: platter, a record whose label is the cover (rotated pixel by pixel), the tonearm, a spectrum
   if (deck) {

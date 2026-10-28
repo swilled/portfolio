@@ -142,7 +142,16 @@
 .np-bar { height: 6px; margin: 10px 0 4px; background: var(--line); }
 .np-bar i { display: block; width: 0; height: 100%; background: var(--amber); }
 .np-note { margin: 0; min-height: 1.6em; font-size: 13px; color: var(--dim); }
-.deck-ui { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.deck-ui { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 10px; }
+/* volume: a stepped pixel bar, same amber-on-line as the progress bar above it */
+.vol { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--dim); }
+.vol-k { min-width: 4.2ch; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: var(--hand, pointer); }
+.vol-k:hover, .vol-k[aria-pressed="true"] { color: var(--amber); }
+.vol-n { min-width: 3ch; text-align: right; font-variant-numeric: tabular-nums; }
+.vol input { -webkit-appearance: none; appearance: none; width: 96px; height: 6px; margin: 0; background: linear-gradient(var(--amber), var(--amber)) 0 0 / var(--v, 70%) 100% no-repeat, var(--line); cursor: var(--hand, pointer); }
+.vol input::-webkit-slider-thumb { -webkit-appearance: none; width: 8px; height: 14px; background: var(--text); border: 0; border-radius: 0; }
+.vol input::-moz-range-thumb { width: 8px; height: 14px; background: var(--text); border: 0; border-radius: 0; }
+.vol input::-moz-range-track { background: transparent; }
 .crate { display: flex; align-items: flex-end; gap: 7px; margin-top: 28px; padding: 22px 12px 0; border-bottom: 6px solid var(--line); overflow-x: auto; scrollbar-width: none; }
 .crate::-webkit-scrollbar { display: none; }
 [data-theme="light"] .crate { border-bottom-color: var(--text); }
