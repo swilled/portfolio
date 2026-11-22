@@ -24,7 +24,7 @@
       <div class="rv-printer" aria-hidden="true"><span class="rv-slot"></span><span class="rv-led"></span></div>
       <div class="rv-feed">
         <div class="rv-paper">
-          <img alt="Pranav Sivakumar's résumé: University of Florida, B.S. Data Science and B.S. Economics; experience at Intellizence, Amazon, MyFundedFutures, PolicyCON and Tutoring Club; projects GEXLab and Hypothesize. Download the PDF below for the text." width="1224" height="1584" decoding="async">
+          <img alt="Pranav Sivakumar’s one-page résumé covers his University of Florida degrees, internships at Intellizence and PolicyCON, and projects including Inside Out. Download the PDF below for the full text." width="1224" height="1584" decoding="async">
           <span class="rv-head" aria-hidden="true"></span>
         </div>
       </div>

@@ -508,7 +508,7 @@
     },
     background: () => {
       const card = el('div', 'acard school');
-      card.innerHTML = `<span class="school-logo">${window.ufLogo ? ufLogo() : ''}</span><p><b>University of Florida</b><br>B.S. data science · B.S. economics<br><span class="dim">class of 2029 · gainesville, fl</span></p>`;
+      card.innerHTML = `<span class="school-logo">${window.ufLogo ? ufLogo() : ''}</span><p><b>University of Florida</b><br>B.S. data science · B.S. economics<br><span class="dim">class of 2028 · gainesville, fl</span></p>`;
       return card;
     },
     experience: () => {
@@ -1115,7 +1115,7 @@
   const COMMANDS = {
     help: () => say(HELP, 10000),
     '?': () => say(HELP, 10000),
-    whoami: () => { go('top'); say('Pranav Sivakumar. Data science + economics @ UF, class of 2029.'); },
+    whoami: () => { go('top'); say('Pranav Sivakumar. Data science + economics @ UF, class of 2028.'); },
     talk: atHero(() => { const q = document.getElementById('chat-q'); if (q) q.focus(); }),
     'talk pranav': () => COMMANDS.talk(),
     neofetch: atHero(() => wave(2, 'that\'s me')),
