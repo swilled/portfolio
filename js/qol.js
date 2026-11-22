@@ -110,11 +110,11 @@
       add('go to', 'cd ~', 'back to the portfolio', goTo('../'));
       add('go to', 'cd ~/life', 'off the clock', goTo('../life/'));
       ['speed', 'blip', 'gexlab'].filter((id) => !location.pathname.includes(`/${id}/`)).forEach((id) => add('projects', id, 'project page', goTo(`../${id}/`)));
-      ['hypothesize', 'spotifind'].forEach((id) => add('projects', id, 'on the portfolio', goTo(`../#${id}`)));
+      ['inside-out', 'hypothesize', 'spotifind'].forEach((id) => add('projects', id, 'on the portfolio', goTo(`../#${id}`)));
       add('projects', 'Velo Research', 'currently building', goTo('../#velo'));
     } else if (life) {
       add('go to', 'cd ~', 'back to the portfolio', goTo('../'));
-      ['speed', 'blip', 'gexlab', 'hypothesize', 'spotifind'].forEach((id) => add('projects', id, 'on the portfolio', goTo(`../#${id}`)));
+      ['speed', 'blip', 'inside-out', 'gexlab', 'hypothesize', 'spotifind'].forEach((id) => add('projects', id, 'on the portfolio', goTo(`../#${id}`)));
       [['summit', 'send the climber up Denali'], ['lights', 'F1 reaction test'], ['pickleball', 'play a rally'], ['play', 'drop the needle'], ['next', 'next record'], ['lando', '🧡']].forEach(([c, h]) => add('commands', c, h, () => run(c)));
     } else {
       [['alpine', 'summit log'], ['court', 'tennis + pickleball'], ['track', 'F1 pit wall'], ['games', 'the handheld'], ['music', 'the record crate']].forEach(([id, h]) => add('~/life', `~/life/${id}`, h, goTo(`life/#${id}`)));

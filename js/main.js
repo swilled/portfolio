@@ -404,7 +404,7 @@
   const MAIL = '<a href="mailto:pranav.sivakumar@ufl.edu">pranav.sivakumar@ufl.edu</a>';
   const ANSWERS = {
     hi: "hey! ask me about what i've built, my stack, or how i use AI.",
-    built: 'five things worth showing. Speed draws live market data at 240Hz, Blip lets blind and low-vision people use the web by voice, GEXLab is an options-data workbench, Hypothesize is an LLM research pipeline, and Spotifind recommends music by sound.',
+    built: 'Speed draws live market data at 240Hz, Blip lets blind and low-vision people use the web by voice, Inside Out puts facial expression cues on a pair of glasses, GEXLab is an options-data workbench, Hypothesize is an LLM research pipeline, and Spotifind recommends music by sound.',
     stack: 'python, typescript, rust and sql every day. react and next.js for interfaces, fastapi on the backend, tauri for desktop, polars and pandas for data. the <a href="#stack">full list</a> is right below, and this is what using it looks like:',
     commits: 'very. here are the last twelve months, live from github:',
     ai: 'constantly. i built MCP servers at Intellizence that put their data inside AI assistants, and Hypothesize uses LLMs to read research and turn claims into testable rules. what i build with:',
@@ -425,7 +425,7 @@
     [/(intern|hire|hiring|job|position|role|available)/, 'hire'],
     [/(email|contact|reach|linkedin|github|talk to you)/, 'contact'],
     [/(experience|intellizence|amazon|tutor|policycon|worked)/, 'experience'],
-    [/(built|build|project|made|make|speed|blip|gexlab|hypothesize|spotifind|portfolio|work on)/, 'built'],
+    [/(built|build|project|made|make|speed|blip|inside[ -]out|gexlab|hypothesize|spotifind|portfolio|work on)/, 'built'],
     [/\b(ai|llm|llms|claude|codex|gpt|openai|mcp|agents?|prompt)\b/, 'ai'],
     [/(commit|github|contribution|active|how much do you code|streak)/, 'commits'],
     [/(stack|language|tech|tools|python|rust|typescript|react|framework|code|program)/, 'stack'],
@@ -485,7 +485,8 @@
     },
     built: () => {
       const card = el('div', 'acard thumbs');
-      [['speed', 'Speed', 'speed/media/speed-poster.webp'], ['blip', 'Blip', 'blip/media/blip-poster.webp'], ['gexlab', 'GEXLab', 'gexlab/media/gexlab-poster.webp'],
+      [['speed', 'Speed', 'speed/media/speed-poster.webp'], ['blip', 'Blip', 'blip/media/blip-poster.webp'],
+        ['inside-out', 'Inside Out', 'inside-out/media/inside-out-poster.webp'], ['gexlab', 'GEXLab', 'gexlab/media/gexlab-poster.webp'],
         ['hypothesize', 'Hypothesize', '#viz-hypothesize'], ['spotifind', 'Spotifind', '#viz-spotifind']].forEach(([id, name, src]) => {
         const a = el('a', 'thumb');
         a.href = '#' + id;
@@ -653,7 +654,7 @@
   });
 
   /* ---------- ls -l: hovering a project shows what it looks like ---------- */
-  const PEEK = { speed: 'speed/media/speed-poster.webp', blip: 'blip/media/blip-poster.webp', gexlab: 'gexlab/media/gexlab-poster.webp', hypothesize: '#viz-hypothesize', spotifind: '#viz-spotifind' };
+  const PEEK = { speed: 'speed/media/speed-poster.webp', blip: 'blip/media/blip-poster.webp', 'inside-out': 'inside-out/media/inside-out-poster.webp', gexlab: 'gexlab/media/gexlab-poster.webp', hypothesize: '#viz-hypothesize', spotifind: '#viz-spotifind' };
   const peek = document.createElement('div');
   peek.className = 'peek';
   peek.setAttribute('aria-hidden', 'true');
@@ -1104,7 +1105,7 @@
 
   const HELP = '<b>commands</b>\n' +
     'whoami · neofetch · ls · colophon\n' +
-    'speed · gexlab · blip · hypothesize · spotifind\n' +
+    'speed · blip · inside-out · gexlab · hypothesize · spotifind\n' +
     'play speed   jump to a demo and play it\n' +
     'experience · about · contact\n' +
     'resume · email · github · linkedin\n' +
@@ -1194,12 +1195,12 @@
   // the ping in the contact section reports this visit's real round trip to the server
   const ttfb = document.querySelector('[data-ttfb]');
   addEventListener('load', () => { const w = window.pageWeight && window.pageWeight(); if (ttfb && w && w.ttfb > 0) ttfb.textContent = w.ttfb.toFixed(2); }, { once: true });
-  ['speed', 'gexlab', 'blip', 'hypothesize', 'spotifind'].forEach((p) => {
+  ['speed', 'blip', 'inside-out', 'gexlab', 'hypothesize', 'spotifind'].forEach((p) => {
     COMMANDS[p] = () => go(p);
     COMMANDS['cd ' + p] = () => go(p);
     COMMANDS['cat ' + p] = () => go(p);
   });
-  ['speed', 'gexlab', 'blip'].forEach((p) => { COMMANDS['play ' + p] = () => playDemo(p + '-video'); });
+  ['speed', 'blip', 'inside-out', 'gexlab'].forEach((p) => { COMMANDS['play ' + p] = () => playDemo(p + '-video'); });
 
   const form = document.getElementById('prompt');
   const input = document.getElementById('cmd');
@@ -1263,7 +1264,7 @@
   window.addEventListener('resize', sizeTty);
   const where = document.getElementById('where');
   const PATHS = [['contact', '~/contact'], ['about', '~/about.md'], ['experience', '~/career'], ['spotifind', '~/projects/spotifind'], ['hypothesize', '~/projects/hypothesize'],
-    ['gexlab', '~/projects/gexlab'], ['blip', '~/projects/blip'], ['speed', '~/projects/speed'], ['work', '~/projects'], ['stack', '~/stack.txt']];
+    ['gexlab', '~/projects/gexlab'], ['inside-out', '~/projects/inside-out'], ['blip', '~/projects/blip'], ['speed', '~/projects/speed'], ['work', '~/projects'], ['stack', '~/stack.txt']];
   const trackPath = () => {
     const y = window.innerHeight * 0.4;
     const hit = PATHS.find(([id]) => { const el = document.getElementById(id); return el && el.getBoundingClientRect().top < y; });

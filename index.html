@@ -138,6 +138,7 @@
       <ul class="ls reveal" aria-label="Project index">
         <li><a href="#speed"><span class="perm">drwxr-xr-x</span><span class="fn">speed/</span><span class="ty">charting platform</span><span class="st">rust · wasm · typescript</span></a></li>
         <li><a href="#blip"><span class="perm">drwxr-xr-x</span><span class="fn">blip/</span><span class="ty">voice agent</span><span class="st">chrome ext · node · websockets</span></a></li>
+        <li><a href="#inside-out"><span class="perm">drwxr-xr-x</span><span class="fn">inside-out/</span><span class="ty">wearable ML</span><span class="st">nicla vision · openmv · tflite</span></a></li>
         <li><a href="#gexlab"><span class="perm">drwxr-xr-x</span><span class="fn">gexlab/</span><span class="ty">data workbench</span><span class="st">next.js · fastapi · sqlite</span></a></li>
         <li><a href="#hypothesize"><span class="perm">drwxr-xr-x</span><span class="fn">hypothesize/</span><span class="ty">llm pipeline</span><span class="st">python · polars · pymupdf</span></a></li>
         <li><a href="#spotifind"><span class="perm">drwxr-xr-x</span><span class="fn">spotifind/</span><span class="ty">recommender</span><span class="st">python · pandas · streamlit</span></a></li>
@@ -200,7 +201,7 @@
           <figure class="player" id="blip-video" data-title="Blip demo"
                   data-chapters='[[0,"the problem"],[13,"what if you could just say"],[16,"meet blip"],[20,"read &amp; reply"],[36,"ask about any page"],[38,"fill any form"],[42,"make it yours"],[46,"outro"]]'
                   data-thumbs="blip/media/blip-thumbs.webp" data-thumb-cols="10" data-duration="50"
-                  data-next-label="GEXLab" data-next-href="#gexlab">
+                  data-next-label="Inside Out" data-next-href="#inside-out">
             <video src="blip/media/blip-demo.mp4" poster="blip/media/blip-poster.webp" preload="none" controls playsinline></video>
           </figure>
           <div class="player-chapters" data-for="blip-video"></div>
@@ -221,7 +222,32 @@
         </div>
       </article>
 
-      <article class="project reveal" id="gexlab">
+      <article class="project reveal" id="inside-out">
+        <div class="media">
+          <figure class="player" id="inside-out-video" data-title="Inside Out demo"
+                  data-chapters='[[0,"intro"],[8,"the glasses"],[14,"camera pipeline"],[18,"on-device model"],[23,"OLED readout"],[28,"browser demo"],[42,"test results"]]'
+                  data-thumbs="inside-out/media/inside-out-thumbs.webp" data-thumb-cols="10" data-duration="55"
+                  data-next-label="GEXLab" data-next-href="#gexlab">
+            <video src="inside-out/media/inside-out-demo.mp4" poster="inside-out/media/inside-out-poster.webp" preload="none" controls playsinline></video>
+          </figure>
+          <div class="player-chapters" data-for="inside-out-video"></div>
+        </div>
+        <div class="info">
+          <p class="kicker">03 · wearable ML · HackJam 2026</p>
+          <h3>Inside Out</h3>
+          <p class="tagline">Glasses that help people who find facial expressions hard to read. A forward-facing camera feeds a model that shows the predicted expression on a tiny OLED beside the wearer’s eye.</p>
+          <ul class="points">
+            <li>A 166 KB INT8 model runs on an Arduino Nicla Vision. Camera frames stay on the glasses.</li>
+            <li>The display shows happy, angry, neutral or surprised, with an unsure state for low-confidence readings.</li>
+            <li>On held-out images, the model reached 89.2% accuracy on FER+ and 81.3% on AffectNet.</li>
+          </ul>
+          <p class="tradeoff">the prototype uses a fixed crop, so it works best with one front-facing face centered in view.</p>
+          <p class="stackline">arduino nicla vision · openmv · micropython · tensorflow lite</p>
+          <p class="links"><a class="go" href="https://github.com/Mahinur26/Inside_Out" target="_blank" rel="noopener">source ↗</a></p>
+        </div>
+      </article>
+
+      <article class="project flip reveal" id="gexlab">
         <div class="media">
           <figure class="player" id="gexlab-video" data-title="GEXLab showreel"
                   data-chapters='[[0,"intro"],[11,"macro regime"],[15,"dealer hedging"],[22,"vol surface"],[26,"range day"],[30,"positioning"],[34,"events"],[38,"cross-asset"],[43,"equity desk"],[50,"montage"]]'
@@ -232,7 +258,7 @@
           <div class="player-chapters" data-for="gexlab-video"></div>
         </div>
         <div class="info">
-          <p class="kicker">03 · data workbench</p>
+          <p class="kicker">04 · data workbench</p>
           <h3>GEXLab</h3>
           <p class="why-line">I wanted to see why price kept stalling at the same levels, and every tool that showed it hid its math.</p>
           <p class="tagline">A self-hosted workbench that puts options data, macro context and market history in one place, with every number reproducible.</p>
@@ -247,7 +273,7 @@
         </div>
       </article>
 
-      <article class="project flip reveal" id="hypothesize">
+      <article class="project reveal" id="hypothesize">
         <div class="media">
           <div class="viz" role="img" aria-label="Animation: papers, blogs and feeds flow into a funnel, become testable rules, get tested; most are rejected and logged with a reason, a few survive.">
             <canvas id="viz-hypothesize"></canvas>
@@ -255,7 +281,7 @@
           </div>
         </div>
         <div class="info">
-          <p class="kicker">04 · llm research pipeline</p>
+          <p class="kicker">05 · llm research pipeline</p>
           <h3>Hypothesize</h3>
           <p class="why-line">ideas are cheap online. I wanted something that kills the bad ones before anyone acts on them.</p>
           <p class="tagline">A pipeline that reads papers and blog posts, turns their claims into testable hypotheses, then tries hard to break them.</p>
@@ -270,14 +296,14 @@
         </div>
       </article>
 
-      <article class="project reveal" id="spotifind">
+      <article class="project flip reveal" id="spotifind">
         <div class="media">
           <div class="viz" role="img" aria-label="Animation: a map of songs as pixels; one track links to its five most similar songs, with feature bars.">
             <canvas id="viz-spotifind"></canvas>
           </div>
         </div>
         <div class="info">
-          <p class="kicker">05 · recommender · class project</p>
+          <p class="kicker">06 · recommender · class project</p>
           <h3>Spotifind</h3>
           <p class="why-line">my recommendations kept looping the same twenty songs.</p>
           <p class="tagline">Music recommendations from audio features: pick a song, get the ones that sound most like it.</p>
